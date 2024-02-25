@@ -2,7 +2,7 @@
     <head>
         <style>
             body {
-                margin: .5  ;
+                margin: 0.5 ;
                 font-family:'Times New Roman', Times, serif;
             }
 
@@ -11,12 +11,13 @@
                 background-color: darkslategrey;
             }
 
-            .navbar a{
+            .navbar a {
                 float: left;
                 color: khaki;
                 text-align: center;
                 font-size: 18 px;
-                padding: 14 px 16 px;
+                padding: 18px 22px;
+                text-decoration: none;
             }
 
             .navbar a:hover{
@@ -24,15 +25,16 @@
                 color: darkslategrey;
             }
 
-            .navbar a:active{
+            .navbar a.active{
                 background-color: gray;
                 color: khaki;
             }
+
         </style>
     </head>
     <body>
         <div class = "navbar">
-            <a class = active href ="./index.html">Home</a>
+            <a class = "active" href ="./index.html">Home</a>
             <a href = "./introduction.html">Introduction</a>
             <a href = "./data_collection_and_scraping.html">Data Collection and Analysis</a>
             <a href = './conclusions.html'>Conclusions and Further Analysis</a>

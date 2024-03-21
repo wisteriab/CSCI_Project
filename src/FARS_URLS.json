@@ -1,0 +1,5 @@
+{
+    "1":"/crashes/GetCaseList?states=1,51&fromYear=2014&toYear=2015&minNumOfVehicles=1&maxNumOfVehicles=6&format=json",
+    "2":"/crashes/GetCaseDetails?stateCase=10003&caseYear=2014&state=1&format=json"
+}
+

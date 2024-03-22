@@ -1,1 +1,5 @@
 cars_env/
+data_consolidation_and_cleaning.ipynb
+cleaning_and_visualizing.ipynb
+test.ipynb
+data/data-raw/fars_data_03.csv

@@ -1,5 +1,7 @@
 {
     "1":"/crashes/GetCaseList?states=1,51&fromYear=2014&toYear=2015&minNumOfVehicles=1&maxNumOfVehicles=6&format=json",
-    "2":"/crashes/GetCaseDetails?stateCase=10003&caseYear=2014&state=1&format=json"
+    "2":"/crashes/GetCaseDetails?stateCase=10003&caseYear=2014&state=1&format=json",
+    "3":"/FARSData/GetFARSData?dataset=Vehicle&FromYear=2021&&ToYear=2021&State=*&format=json",
+    "4":"/FARSData/GetFARSData?dataset=Accident&FromYear=2021&&ToYear=2021&State=*&format=json"
 }
 

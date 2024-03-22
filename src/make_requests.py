@@ -11,7 +11,7 @@ class Requester:
             self.fars_urls = json.load(f)
         
     
-    def get_fars_data(self, extensionNumber = 1):
+    def get_fars_data(self, extensionNumber = 4):
         
         # Get the API url by the extension number
         base_url = "https://crashviewer.nhtsa.dot.gov/CrashAPI"        
@@ -25,7 +25,7 @@ class Requester:
         # Format as pandas DataFrame and save it to data folder
         keys = data[0].keys()
         df = pd.DataFrame({k: [d[k] for d in data] for k in keys})
-        df.to_csv(f"../data/fars_data_{extensionNumber:02d}.csv")
+        df.to_csv(f"../data/data-raw/fars_data_{extensionNumber:02d}.csv")
 
     def get_someother_data(self):
         pass

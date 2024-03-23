@@ -32,6 +32,16 @@
                 color: khaki;
             }
 
+            p {
+                text-indent: 50px;
+                line-height: 1.2;
+                text-align: justify;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
         </style>
     </head>
     <body>
@@ -43,10 +53,467 @@
             <a href = './conclusions.html'>Conclusions</a>
             <a href = "./Resources.html">Resources</a>
         </div>
-        <div style = "padding: 14px 16px">
-            <h1>Data Collection</h1>
+        <div style = "margin: 50px 200px 50px">
+            <h1>Data Exploration</h1>
+            <h2>Data Collection</h2>
             <p>
-                Introductory Content
+                <i>Explain .py that collect api info here</i>
+            </p>
+            <h2>Data Cleaning and Analysis</h2>
+            <p>
+                The vast majority of the data used for our project comes from the Fatality Analysis Reporting System (FARS) as produce by the National Highway Traffic Safety Association (NHTSA).
+                The data was collected through the public API associated with FARS, publicly available on the <a href = 'https://crashviewer.nhtsa.dot.gov/CrashAPI'> FARS website</a>
+                Furthermore, county level income was collected from the Bureau of Economic Analysis.
+                Initial download of vehicle crash dataset from the FARS tool proved to be too large to publish to github unedited as it was roughly 120 MB.
+                As such, 53 empty and duplicate columns were removed to allow for pushing to Github pages for the purposes of this assignment.
+                No other cleaning was done to demonstrate what the raw data looks like. 
+                The vehicle dataset contains information regarding the vehicles included within an accident in 2021 and the persons in each vehicle.
+                It is presented below and still maintains 94 columns (some of which are still empty or duplicates)
+                <div>
+                    <style scoped>
+                        .dataframe tbody tr th:only-of-type {
+                            vertical-align: middle;
+                        }
+                    
+                        .dataframe tbody tr th {
+                            vertical-align: top;
+                        }
+                    
+                        .dataframe thead th {
+                            text-align: right;
+                        }
+                    </style>
+                    <table border="1" class="dataframe">
+                      <thead>
+                        <tr style="text-align: right;">
+                          <th></th>
+                          <th>Unnamed: 0</th>
+                          <th>ARR_HOUR</th>
+                          <th>ARR_HOURNAME</th>
+                          <th>ARR_MIN</th>
+                          <th>ARR_MINNAME</th>
+                          <th>CF1</th>
+                          <th>CF1NAME</th>
+                          <th>CF2</th>
+                          <th>CF2NAME</th>
+                          <th>CF3</th>
+                          <th>...</th>
+                          <th>VE_TOTAL</th>
+                          <th>WEATHER</th>
+                          <th>WEATHER1</th>
+                          <th>WEATHER1NAME</th>
+                          <th>WEATHER2</th>
+                          <th>WEATHER2NAME</th>
+                          <th>WEATHERNAME</th>
+                          <th>WRK_ZONE</th>
+                          <th>WRK_ZONENAME</th>
+                          <th>YEAR</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>0</th>
+                          <td>0</td>
+                          <td>22</td>
+                          <td>10:00pm-10:59pm</td>
+                          <td>25</td>
+                          <td>25</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>...</td>
+                          <td>2</td>
+                          <td>2</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Rain</td>
+                          <td>0</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                        </tr>
+                        <tr>
+                          <th>1</th>
+                          <td>1</td>
+                          <td>19</td>
+                          <td>7:00pm-7:59pm</td>
+                          <td>9</td>
+                          <td>9</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>...</td>
+                          <td>1</td>
+                          <td>2</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Rain</td>
+                          <td>0</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                        </tr>
+                        <tr>
+                          <th>2</th>
+                          <td>2</td>
+                          <td>9</td>
+                          <td>9:00am-9:59am</td>
+                          <td>40</td>
+                          <td>40</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>...</td>
+                          <td>1</td>
+                          <td>2</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Rain</td>
+                          <td>0</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                        </tr>
+                        <tr>
+                          <th>3</th>
+                          <td>3</td>
+                          <td>16</td>
+                          <td>4:00pm-4:59pm</td>
+                          <td>28</td>
+                          <td>28</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>...</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Clear</td>
+                          <td>0</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                        </tr>
+                        <tr>
+                          <th>4</th>
+                          <td>4</td>
+                          <td>22</td>
+                          <td>10:00pm-10:59pm</td>
+                          <td>30</td>
+                          <td>30</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>...</td>
+                          <td>2</td>
+                          <td>10</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Cloudy</td>
+                          <td>0</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p>5 rows × 94 columns</p>
+                    </div>
+                <br>
+                <br>
+                The raw data from the Bureau of Economic Analysis includes average income by county and is as follows:
+                <br>
+                <br>
+                <div>
+                    <style scoped>
+                        .dataframe tbody tr th:only-of-type {
+                            vertical-align: middle;
+                        }
+                    
+                        .dataframe tbody tr th {
+                            vertical-align: top;
+                        }
+                    
+                        .dataframe thead th {
+                            text-align: right;
+                        }
+                    </style>
+                    <table border="1" class="dataframe">
+                      <thead>
+                        <tr style="text-align: right;">
+                          <th></th>
+                          <th>Table 1. Per Capita Personal Income, by County, 2020–2022</th>
+                          <th>Unnamed: 1</th>
+                          <th>Unnamed: 2</th>
+                          <th>Unnamed: 3</th>
+                          <th>Unnamed: 4</th>
+                          <th>Unnamed: 5</th>
+                          <th>Unnamed: 6</th>
+                          <th>Unnamed: 7</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>0</th>
+                          <td>NaN</td>
+                          <td>Per capita personal income1</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Percent change from preceding period</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                        </tr>
+                        <tr>
+                          <th>1</th>
+                          <td>NaN</td>
+                          <td>Dollars</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Rank in state</td>
+                          <td>Percent change</td>
+                          <td>NaN</td>
+                          <td>Rank in state</td>
+                        </tr>
+                        <tr>
+                          <th>2</th>
+                          <td>NaN</td>
+                          <td>2020</td>
+                          <td>2021</td>
+                          <td>2022</td>
+                          <td>2022</td>
+                          <td>2021</td>
+                          <td>2022.0</td>
+                          <td>2022</td>
+                        </tr>
+                        <tr>
+                          <th>3</th>
+                          <td>United States</td>
+                          <td>59,153</td>
+                          <td>64,430</td>
+                          <td>65,470</td>
+                          <td>--</td>
+                          <td>8.9</td>
+                          <td>1.6</td>
+                          <td>--</td>
+                        </tr>
+                        <tr>
+                          <th>4</th>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    </div>
+                <br>
+                <br>
+                Lastly, the accident dataset from FARS contains information on fatal accidents in 2021, and includes categorical and technical information about the overall accident as opposed to vehicle information in an accident as the Vehicle dataset does.
+                Unfiltered, it looks as follows:
+                <br>
+                <br>
+                <div>
+                    <style scoped>
+                        .dataframe tbody tr th:only-of-type {
+                            vertical-align: middle;
+                        }
+                    
+                        .dataframe tbody tr th {
+                            vertical-align: top;
+                        }
+                    
+                        .dataframe thead th {
+                            text-align: right;
+                        }
+                    </style>
+                    <table border="1" class="dataframe">
+                      <thead>
+                        <tr style="text-align: right;">
+                          <th></th>
+                          <th>Unnamed: 0</th>
+                          <th>ARR_HOUR</th>
+                          <th>ARR_HOURNAME</th>
+                          <th>ARR_MIN</th>
+                          <th>ARR_MINNAME</th>
+                          <th>CF1</th>
+                          <th>CF1NAME</th>
+                          <th>CF2</th>
+                          <th>CF2NAME</th>
+                          <th>CF3</th>
+                          <th>...</th>
+                          <th>VE_TOTAL</th>
+                          <th>WEATHER</th>
+                          <th>WEATHER1</th>
+                          <th>WEATHER1NAME</th>
+                          <th>WEATHER2</th>
+                          <th>WEATHER2NAME</th>
+                          <th>WEATHERNAME</th>
+                          <th>WRK_ZONE</th>
+                          <th>WRK_ZONENAME</th>
+                          <th>YEAR</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>0</th>
+                          <td>0</td>
+                          <td>22</td>
+                          <td>10:00pm-10:59pm</td>
+                          <td>25</td>
+                          <td>25</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>...</td>
+                          <td>2</td>
+                          <td>2</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Rain</td>
+                          <td>0</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                        </tr>
+                        <tr>
+                          <th>1</th>
+                          <td>1</td>
+                          <td>19</td>
+                          <td>7:00pm-7:59pm</td>
+                          <td>9</td>
+                          <td>9</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>...</td>
+                          <td>1</td>
+                          <td>2</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Rain</td>
+                          <td>0</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                        </tr>
+                        <tr>
+                          <th>2</th>
+                          <td>2</td>
+                          <td>9</td>
+                          <td>9:00am-9:59am</td>
+                          <td>40</td>
+                          <td>40</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>...</td>
+                          <td>1</td>
+                          <td>2</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Rain</td>
+                          <td>0</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                        </tr>
+                        <tr>
+                          <th>3</th>
+                          <td>3</td>
+                          <td>16</td>
+                          <td>4:00pm-4:59pm</td>
+                          <td>28</td>
+                          <td>28</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>...</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Clear</td>
+                          <td>0</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                        </tr>
+                        <tr>
+                          <th>4</th>
+                          <td>4</td>
+                          <td>22</td>
+                          <td>10:00pm-10:59pm</td>
+                          <td>30</td>
+                          <td>30</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>...</td>
+                          <td>2</td>
+                          <td>10</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>NaN</td>
+                          <td>Cloudy</td>
+                          <td>0</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p>5 rows × 94 columns</p>
+                    </div>
+                Utlimately two separate csv's were created for our needs, based on the two original FARS datasets.
+                Keeping two csv's enabled us to maintain a larger collection of data for analysis and a general understanding of traffic incidents in the US.
+            </p>
+                The Vehcile dataset was first cut down susbstantially by eliminating the columns tha contained either no data or duplicate data as previously mentioned.
+                Over 90 columns were cut from the dataset this way which drastically reduced the size of dataframe.
+                Much of the duplicate data came from the fact that two separate columns would represent the same data using diferent values, one would often use a code or value to represent some categorical data while another column would be said category.
+                In other cases, long strings of numbers would be split into single characters like in the case of license plate information.
+                For the data that was left, we decided that on a general basis, NaN values would be kept in the main datasets to be removed at the discretion of the researcher as needed for a specific task.
+                This was chosen over removing rows that held NaN values as Nan often held positional information. 
+                For example, in the "V_CONFIGNAME" column that describes how a truck, trailer, or towed vehicle was oriented (configured), an NaN value would describe such vehicles that had no capacity to tow, weren't of such a stature, or weren't towing.
+                Thus the NaN provides some information to the overall dataset as the other rows still include traffic accident data for other vehicle types.
+            <p>
+                The accident dataset was similarly cut down to remove any duplicate columns, and in most cases, NaN values were kept under the same pretenses as the vehicle dataset.
+                
+
             </p>
         </div>
     </body>

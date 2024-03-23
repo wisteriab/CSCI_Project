@@ -107,8 +107,8 @@ class Plotter:
             avgDeath = np.mean(subDF.DEATHS)
             avgDeaths.append(avgDeath)
             
-            errs = np.std(subDF.DEATHS)/np.sqrt(len(subDF.DEATHS))
-        
+            err = np.std(subDF.DEATHS)/np.sqrt(len(subDF.DEATHS))
+            errs.append(err)
         
         fig, ax = plt.subplots()
         fig.set_facecolor("lightgrey")
@@ -119,9 +119,83 @@ class Plotter:
         ax.set_title("Avg Deaths per Car Involved in a Fatal Crash by Model Year")
         plt.savefig("../plots/by_model_year.png")
         
+    def by_make_and_year(self):
+        mask = (self.df3.MOD_YEAR < 2022) &  (self.df3.MOD_YEAR > 1990)
+
+        years = []
+        avgDeaths = []
+        avgVolvoDeaths = []
+        errs = []
+        errsVolvo = []
+        avgFordDeaths = []
+        errsFord = []
+        for year in set(self.df3.MOD_YEAR[mask]):
+            years.append(year)
+            
+            subDF_Volvo = self.df3[(self.df3.MOD_YEAR == year) & (self.df3.MAKENAME == "Volvo")]
+            subDF = self.df3[(self.df3.MOD_YEAR == year) & (self.df3.MAKENAME == "Toyota")]
+            subDF_Ford = self.df3[(self.df3.MOD_YEAR == year) & (self.df3.MAKENAME == "Ford")]
+            
+            avgDeath = np.mean(subDF.DEATHS)
+            avgDeaths.append(avgDeath)
+            
+            avgDeathVolvo = np.mean(subDF_Volvo.DEATHS)
+            avgVolvoDeaths.append(avgDeathVolvo)
+            
+            avgDeathFord = np.mean(subDF_Ford.DEATHS)
+            avgFordDeaths.append(avgDeathFord)
+            
+            err = np.std(subDF.DEATHS)/np.sqrt(len(subDF.DEATHS))
+            errs.append(err)
+            
+            errVolvo = np.std(subDF_Volvo.DEATHS)/np.sqrt(len(subDF_Volvo.DEATHS))
+            errsVolvo.append(errVolvo)
+            
+            err = np.std(subDF_Ford.DEATHS)/np.sqrt(len(subDF_Ford.DEATHS))
+            errsFord.append(err) 
+            
+        fig, ax = plt.subplots()
+        fig.set_facecolor("lightgrey")
+        ax.errorbar(years, avgDeaths, yerr = errs, linestyle = "none", marker = ".", label = "Toyota")
+        ax.errorbar(years, avgVolvoDeaths, yerr = errsVolvo, linestyle = "none", marker = ".", label = "Volvo")
+        ax.errorbar(years, avgFordDeaths, yerr = errsFord, linestyle = "none", marker = ".", label = "Ford")
+        ax.grid(alpha = 0.2)
+        ax.set_xlabel("Model Year", fontsize = 14)
+        ax.set_ylabel("Average Death Rate", fontsize = 14)
+        ax.set_title("Avg Deaths per Car Involved in a Fatal Crash by Model Year")
+        plt.legend()
+        plt.savefig("../plots/by_make_and_year.png")
+    
+    def by_speed(self):
+        mask = (self.df3.TRAV_SP < 120) & (self.df3.TRAV_SP > 30)
+        speeds = []
+        avgDeaths = []
+        errs = []
+        for speed in set(self.df3.TRAV_SP[mask]):
+            speeds.append(speed)
+            
+            subDF = self.df3[self.df3.TRAV_SP == speed]
+            
+            avgDeath = np.mean(subDF.DEATHS)
+            avgDeaths.append(avgDeath)
+            
+            err = np.std(subDF.DEATHS)/np.sqrt(len(subDF.DEATHS))
+            
+            errs.append(err)
+
+        fig, ax = plt.subplots()
+        fig.set_facecolor("lightgrey")
+        ax.errorbar(speeds, avgDeaths, yerr = errs, linestyle = "none", marker = ".")
+        ax.grid(alpha = 0.2)
+        ax.set_xlabel("Speed (MPH)", fontsize = 14)
+        ax.set_ylabel("Average Death Rate", fontsize = 14)
+        ax.set_title("Avg Deaths per Car Involved in a Fatal Crash by Travel Speed")
+        plt.savefig("../plots/by_speed.png")
         
 if __name__ == "__main__":
     plotter = Plotter()
-    plotter.by_time()
+    #plotter.by_time()
     #plotter.by_weather()
     #plotter.by_model_year()
+    #plotter.by_make_and_year()
+    plotter.by_speed()

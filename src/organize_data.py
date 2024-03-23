@@ -12,10 +12,12 @@ vehicle_data.head()
 #Removing unnecessary/duplicate data
 vehicle_data = vehicle_data.drop(columns = vehicle_data.loc[:,'Unnamed: 0.1':'CDL_STATNAME'])
 vehicle_data = vehicle_data.drop(columns = vehicle_data.loc[:,'MCARR_I1':'MCARR_IDNAME'])
-vehicle_data_data = vehicle_data.drop(columns = vehicle_data.loc[:,'PEV_SUS1':'P_CRASH1'])
-vehicle_data_data = vehicle_data.drop(columns = vehicle_data.loc[:,'MAKE':'MAK_MODNAME'])
-vehicle_data_data = vehicle_data.drop(columns = ['DR_DRINK', 
+vehicle_data = vehicle_data.drop(columns = vehicle_data.loc[:,'PEV_SUS1':'P_CRASH1'])
+vehicle_data = vehicle_data.drop(columns = vehicle_data.loc[:,'MAKE':'MAK_MODNAME'])
+vehicle_data = vehicle_data.drop(columns = [
+                                            'DR_DRINK', 
                                               'DEFORMED',
+                                              'Distractions',
                                               'FIRE_EXPNAME', 
                                               'EMER_USENAME', 
                                               'GVWR_TO',
@@ -29,6 +31,7 @@ vehicle_data_data = vehicle_data.drop(columns = ['DR_DRINK',
                                               'L_STATUS',
                                               'L_TYPE',
                                               'MAN_COLL',
+                                              'Maneuvers',
                                               'MODEL',
                                               'MOD_YEARNAME',
                                               'M_HARM',
@@ -145,7 +148,8 @@ fatal_incident = fatal_incident.drop(columns = fatal_incident.loc[:,'CF1':'CITY'
 fatal_incident = fatal_incident.drop(columns = fatal_incident.loc[:,'WEATHER1':'WEATHER2NAME'])
 
 fatal_incident = fatal_incident.drop(columns = ['Unnamed: 0',
-                               'COUNTY', 
+                               'COUNTY',
+                               'DRUNK_DR', 
                                'FUNC_SYS',
                                'HARM_EV',
                                'LGT_COND',
@@ -171,5 +175,13 @@ fatal_incident = fatal_incident.drop(columns = ['Unnamed: 0',
                                'WRK_ZONE'
 ])
 
+#Removing outliers based on income
+
+q1 = np.percentile(fatal_incident['COUNTYINCOME'].dropna(), 25)
+q3 = np.percentile(fatal_incident['COUNTYINCOME'].dropna(), 75)
+iqr = q3 - q1
+outlier = iqr*1.5 + q3
+fatal_incident = fatal_incident[fatal_incident['COUNTYINCOME'].notna()]
+fatal_incident = fatal_incident[fatal_incident['COUNTYINCOME'] <= outlier]
 
 fatal_incident.to_csv('..\data\data-clean\\fatal_incidents_by_county.csv')

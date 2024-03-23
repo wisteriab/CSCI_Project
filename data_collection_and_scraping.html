@@ -514,8 +514,12 @@
                 The Vehicle dataset was first cut down susbstantially by eliminating the columns tha contained either no data or duplicate data as previously mentioned.
                 Over 90 columns were cut from the dataset this way which drastically reduced the size of dataframe.
                 Much of the duplicate data came from the fact that two separate columns would represent the same data using diferent values, one would often use a code or value to represent some categorical data while another column would be said category.
+                I.e. a numerical column would exist to act as a categorical column. 
+                Dependent on the specific column, either the categorical or numerical data was selected for the final dataset but never both to save space and potential confusion.
+                For example, 2 separate columns existed prior to cleaning for the speed limit of a given road where one was an integer while the other was a string.
+                In this case we elected to keep the integer.
                 In other cases, long strings of numbers would be split into single characters like in the case of license plate information.
-                For the data that was left, we decided that on a general basis, NaN values would be kept in the main datasets to be removed at the discretion of the researcher as needed for a specific task.
+                For the data that was left, we decided that on a general basis, NaN values would be kept in the main datasets to be removed at the discretion of the researcher as needed for a specific task (for example for a specific graph or pursuing a specific question).
                 This was chosen over removing rows that held NaN values as Nan often held positional information. 
                 For example, in the "V_CONFIGNAME" column that describes how a truck, trailer, or towed vehicle was oriented (configured), an NaN value would describe such vehicles that had no capacity to tow, weren't of such a stature, or weren't towing.
                 Thus the NaN provides some information to the overall dataset as the other rows still include traffic accident data for other vehicle types.
@@ -696,8 +700,12 @@
                 <img src = "./plots/us_fatality_map.png" alt = "density map" class = 'center'>
                 Furthermore, using a generalized, nationwide dataset will allow for large sweeping analysis of major brands and their presence in fatal incidents.
                 Looking to the bar graph below, we can the ten manufacturers that appear most frequently on the site of fatal incidents.
-                This information may provide insight or suggest further research to the either (a) the company culture (b) the culture surrounding teh companies vehicles (c) or the safety features provided by the larger companies.
-                <img src = ".\plotsmake_fatality_top_ten.png" alt = 'top ten manufacturers'>
+                This information may provide insight or suggest further research to the either (a) the company culture (b) the culture surrounding the companies vehicles (c) or the safety features provided by the larger companies.
+                <img src = ".\plots\make_fatality_top_ten.png" alt = 'top ten manufacturers' class = 'center'>
+                We can look into this a little further by seeing how vehicles are damaged during such accidents.
+                Below is a pie chart demonstrating the proportions of vehicles that are either undamaged, display minor damage, have some functional damage, or are totaled.
+                It is clear from the graph below tha most vehicles end up being completely totalled from these accidents.
+                <img src = '.\plots\vehicle_deformity.png' class = center>
             </p>
             <h3>Accident Dataset</h3>
             <p>
@@ -895,7 +903,7 @@
                 The plot below simulates a vehicle moving in the 12 clock direction with the size of the line coming off of it demonstrating the quantity of accidents on that point of the vehicle.
                 This may suggest a further look into the models and safety features available on the front of a vehicle and its' impact on fatal accidents.
                 Looking to the graph, it is evident that most accidents occur head on, or at the 12 Clock Position, followed by being rear-ended or t-boned in no particular order.
-                <img src = ".\plots\impact_point.png" alt = 'impact point'>
+                <img src = ".\plots\impact_point.png" alt = 'impact point' class = center>
             </p>
         </div>
     </body>

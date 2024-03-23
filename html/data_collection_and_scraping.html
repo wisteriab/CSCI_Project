@@ -64,10 +64,7 @@
             <h1>Data Exploration</h1>
             <h2>Data Collection</h2>
             <p>
-                <i>We found the URL for the API through the Fatality Analysis Reporting System (FARs).
-                The FARs database offers many endpoints for different statistics relating to fatal car crashes.
-                We saved four endpoints of interest into a json file and then created a Python file that concatenates the endpoint paths with the base API url. 
-                Get requests are then made on the full API paths whereupon the json output is extracted and organized into comma separated files.</i>
+                <i>Explain .py that collect api info here</i>
             </p>
             <h2>Data Cleaning and Analysis</h2>
             <p>
@@ -709,15 +706,6 @@
                 Below is a pie chart demonstrating the proportions of vehicles that are either undamaged, display minor damage, have some functional damage, or are totaled.
                 It is clear from the graph below tha most vehicles end up being completely totalled from these accidents.
                 <img src = '..\plots\vehicle_deformity.png' class = center>
-                Regarding speed, we can see that the probability of a passenger dying in a car accident doubles from 50 to 80 MPH. 
-                The larger error bars on the higher speeds suggest that fewer people travel at that velocity.
-                <img src = "..\plots\by_speed.png" class = center>
-                Next, we decided to look at average death rates as a function of vehicle model year. 
-                The next two images show that, generally, cars are getting safer as time progresses.
-                The larger error bars for older years reflects that fewer accidents involved older vehicles - probably because fewer old vehicles are still driven.
-                Lastly, the image comparing different marks shows that Volvo, a brand known for safety reputation, has highest safety rating compared to Toyota and Ford.
-                <img src = "..\plots\by_model_year.png" class = "center">
-                <img src = "..\plots\by_make_and_year.png" class = "center">
             </p>
             <h3>Accident Dataset</h3>
             <p>
@@ -730,7 +718,6 @@
                 Comparing the density of accidents across incomes helped to demonstrate the need to eliminate a large portion of outliers.
                 Said graph is included below. Notice the length o fthe right tail, suggesting there are outliers.
                 <img src = "../plots/fatality_income_density.png" alt = "Fatal Accident Density by Income" class = 'center'>
-                
             </p>
             <p>
                 As such the outliers were calculated using the Inner Quartile Range (IQR) for the available salary data. 
@@ -917,11 +904,6 @@
                 This may suggest a further look into the models and safety features available on the front of a vehicle and its' impact on fatal accidents.
                 Looking to the graph, it is evident that most accidents occur head on, or at the 12 Clock Position, followed by being rear-ended or t-boned in no particular order.
                 <img src = "..\plots\impact_point.png" alt = 'impact point' class = center>
-                Lastly, we looked at two other variables for general accidents. The first shows that weather is largely inconsequential amongst survival rates. 
-                The second shows the occurence of fatal accidents against the time of day. The dips at the half hour mark suggest that locally, more accidents occur in the first half of the hour.
-                <img src = "..\plots\by_weather.png" alt = 'impact point' class = center>
-                <img src = "..\plots\by_time.png" alt = 'impact point' class = center>
-                
             </p>
         </div>
     </body>

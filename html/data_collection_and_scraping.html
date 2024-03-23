@@ -42,6 +42,13 @@
                 text-decoration: none;
             }
 
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+            }
+
         </style>
     </head>
     <body>
@@ -502,18 +509,401 @@
                 Utlimately two separate csv's were created for our needs, based on the two original FARS datasets.
                 Keeping two csv's enabled us to maintain a larger collection of data for analysis and a general understanding of traffic incidents in the US.
             </p>
-                The Vehcile dataset was first cut down susbstantially by eliminating the columns tha contained either no data or duplicate data as previously mentioned.
+            <h3>Vehicle Dataset</h3>
+            <p>
+                The Vehicle dataset was first cut down susbstantially by eliminating the columns tha contained either no data or duplicate data as previously mentioned.
                 Over 90 columns were cut from the dataset this way which drastically reduced the size of dataframe.
                 Much of the duplicate data came from the fact that two separate columns would represent the same data using diferent values, one would often use a code or value to represent some categorical data while another column would be said category.
+                I.e. a numerical column would exist to act as a categorical column. 
+                Dependent on the specific column, either the categorical or numerical data was selected for the final dataset but never both to save space and potential confusion.
+                For example, 2 separate columns existed prior to cleaning for the speed limit of a given road where one was an integer while the other was a string.
+                In this case we elected to keep the integer.
                 In other cases, long strings of numbers would be split into single characters like in the case of license plate information.
-                For the data that was left, we decided that on a general basis, NaN values would be kept in the main datasets to be removed at the discretion of the researcher as needed for a specific task.
+                For the data that was left, we decided that on a general basis, NaN values would be kept in the main datasets to be removed at the discretion of the researcher as needed for a specific task (for example for a specific graph or pursuing a specific question).
                 This was chosen over removing rows that held NaN values as Nan often held positional information. 
                 For example, in the "V_CONFIGNAME" column that describes how a truck, trailer, or towed vehicle was oriented (configured), an NaN value would describe such vehicles that had no capacity to tow, weren't of such a stature, or weren't towing.
                 Thus the NaN provides some information to the overall dataset as the other rows still include traffic accident data for other vehicle types.
+                The cleaned data then looks as follows:
+                <div>
+                    <style scoped>
+                        .dataframe tbody tr th:only-of-type {
+                            vertical-align: middle;
+                        }
+                    
+                        .dataframe tbody tr th {
+                            vertical-align: top;
+                        }
+                    
+                        .dataframe thead th {
+                            text-align: right;
+                        }
+                    </style>
+                    <table border="1" class="dataframe">
+                      <thead>
+                        <tr style="text-align: right;">
+                          <th></th>
+                          <th>DAY</th>
+                          <th>DEATHS</th>
+                          <th>DEFORMEDNAME</th>
+                          <th>DR_DRINKNAME</th>
+                          <th>DR_HGT</th>
+                          <th>DR_PRES</th>
+                          <th>DR_PRESNAME</th>
+                          <th>DR_WGT</th>
+                          <th>DR_ZIP</th>
+                          <th>FIRST_MO</th>
+                          <th>...</th>
+                          <th>VPICBODYCLASSNAME</th>
+                          <th>VPICMAKENAME</th>
+                          <th>VPICMODELNAME</th>
+                          <th>VPROFILENAME</th>
+                          <th>VSPD_LIM</th>
+                          <th>VSURCONDNAME</th>
+                          <th>VTCONT_FNAME</th>
+                          <th>VTRAFCONNAME</th>
+                          <th>VTRAFWAYNAME</th>
+                          <th>V_CONFIGNAME</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>0</th>
+                          <td>12</td>
+                          <td>1</td>
+                          <td>Disabling Damage</td>
+                          <td>No</td>
+                          <td>70.0</td>
+                          <td>1</td>
+                          <td>Yes</td>
+                          <td>NaN</td>
+                          <td>33060</td>
+                          <td>2</td>
+                          <td>...</td>
+                          <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
+                          <td>Jeep</td>
+                          <td>Patriot</td>
+                          <td>Level</td>
+                          <td>70</td>
+                          <td>Wet</td>
+                          <td>No Controls</td>
+                          <td>No Controls</td>
+                          <td>Two-Way,  Divided, Positive  Median Barrier</td>
+                          <td>Not Applicable</td>
+                        </tr>
+                        <tr>
+                          <th>1</th>
+                          <td>12</td>
+                          <td>1</td>
+                          <td>Disabling Damage</td>
+                          <td>No</td>
+                          <td>NaN</td>
+                          <td>1</td>
+                          <td>Yes</td>
+                          <td>NaN</td>
+                          <td>30316</td>
+                          <td>0</td>
+                          <td>...</td>
+                          <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
+                          <td>Volvo</td>
+                          <td>XC60</td>
+                          <td>Level</td>
+                          <td>70</td>
+                          <td>Wet</td>
+                          <td>No Controls</td>
+                          <td>No Controls</td>
+                          <td>Two-Way,  Divided, Positive  Median Barrier</td>
+                          <td>Not Applicable</td>
+                        </tr>
+                        <tr>
+                          <th>2</th>
+                          <td>11</td>
+                          <td>2</td>
+                          <td>Disabling Damage</td>
+                          <td>No</td>
+                          <td>65.0</td>
+                          <td>1</td>
+                          <td>Yes</td>
+                          <td>190.0</td>
+                          <td>36116</td>
+                          <td>1</td>
+                          <td>...</td>
+                          <td>Sedan/Saloon</td>
+                          <td>Lexus</td>
+                          <td>ES</td>
+                          <td>Level</td>
+                          <td>70</td>
+                          <td>Wet</td>
+                          <td>No Controls</td>
+                          <td>No Controls</td>
+                          <td>Two-Way,  Divided, Positive  Median Barrier</td>
+                          <td>Not Applicable</td>
+                        </tr>
+                        <tr>
+                          <th>3</th>
+                          <td>7</td>
+                          <td>0</td>
+                          <td>Functional Damage</td>
+                          <td>No</td>
+                          <td>65.0</td>
+                          <td>1</td>
+                          <td>Yes</td>
+                          <td>147.0</td>
+                          <td>35405</td>
+                          <td>11</td>
+                          <td>...</td>
+                          <td>Sedan/Saloon</td>
+                          <td>Toyota</td>
+                          <td>Camry</td>
+                          <td>Downhill</td>
+                          <td>70</td>
+                          <td>Wet</td>
+                          <td>No Controls</td>
+                          <td>No Controls</td>
+                          <td>Two-Way, Divided, Unprotected Median</td>
+                          <td>Not Applicable</td>
+                        </tr>
+                        <tr>
+                          <th>4</th>
+                          <td>3</td>
+                          <td>1</td>
+                          <td>Disabling Damage</td>
+                          <td>No</td>
+                          <td>72.0</td>
+                          <td>1</td>
+                          <td>Yes</td>
+                          <td>NaN</td>
+                          <td>33127</td>
+                          <td>12</td>
+                          <td>...</td>
+                          <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
+                          <td>Infiniti</td>
+                          <td>QX60</td>
+                          <td>Level</td>
+                          <td>70</td>
+                          <td>Dry</td>
+                          <td>No Controls</td>
+                          <td>No Controls</td>
+                          <td>Two-Way, Divided, Unprotected Median</td>
+                          <td>Not Applicable</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p>5 rows × 80 columns</p>
+                    </div>
+            </p>
+            <p>
+                From here we can look at some general information within the dataset to get a better undersanding of the overall dataset.  
+                For example, included below is a summation of all fatal traffic incidents placed within a map of the US.
+                As the color of the state gets darker, a greater density of overall fatal accidents occur within a given state. 
+                This will provide necessary information on what states to pursue in future portions of this project.
+                From the graph below it is evident that California, Texas, and FLorida, likely due to the population in these states being larger than others. 
+                <img src = "./plots/us_fatality_map.png" alt = "density map" class = 'center'>
+                Furthermore, using a generalized, nationwide dataset will allow for large sweeping analysis of major brands and their presence in fatal incidents.
+                Looking to the bar graph below, we can the ten manufacturers that appear most frequently on the site of fatal incidents.
+                This information may provide insight or suggest further research to the either (a) the company culture (b) the culture surrounding the companies vehicles (c) or the safety features provided by the larger companies.
+                <img src = ".\plots\make_fatality_top_ten.png" alt = 'top ten manufacturers' class = 'center'>
+                We can look into this a little further by seeing how vehicles are damaged during such accidents.
+                Below is a pie chart demonstrating the proportions of vehicles that are either undamaged, display minor damage, have some functional damage, or are totaled.
+                It is clear from the graph below tha most vehicles end up being completely totalled from these accidents.
+                <img src = '.\plots\vehicle_deformity.png' class = center>
+            </p>
+            <h3>Accident Dataset</h3>
             <p>
                 The accident dataset was similarly cut down to remove any duplicate columns, and in most cases, NaN values were kept under the same pretenses as the vehicle dataset.
-                
-
+                Following this, the income dataset from the Bureau of Economic Analysis was saved and pulled. 
+                The columns of the BEA dataset were renamed to match that of the accident dataset, and all counties present in the dataset were formatted to be all lowercase for commonality.
+                The county column in the accident dataset was similarly formatted in all lowercase. 
+                The 2021 income information from the BEA dataset was then joined to the end of the accident dataset such that each accident now included the average income of the county that the accident took place in.
+                A brief analysis of the dataset at this point showed the need to clean further on a basis of income by using a kernel density plot.
+                Comparing the density of accidents across incomes helped to demonstrate the need to eliminate a large portion of outliers.
+                Said graph is included below. Notice the length o fthe right tail, suggesting there are outliers.
+                <img src = "./plots/fatality_income_density.png" alt = "Fatal Accident Density by Income" class = 'center'>
+            </p>
+            <p>
+                As such the outliers were calculated using the Inner Quartile Range (IQR) for the available salary data. 
+                The first quartile was calculated as $44,665, the third quartile was $58750, and the inner quartile range was $14,085.
+                As a quick check to demonstrate the possibility of outliers came from checking the median and mean while calculating the iqr outliers.
+                With a mean of $53,383 and a median of $58,750, there is likely to be positive skew.
+                Using these numbers, any value above the threshold of $79,887.50 (1.5*IQR above the third quartile) was considered to be an outlier and was thus excluded from the dataset.
+                Conceptually this makes sense to exclude both the outliers and extreme earners too.
+                From an outlier standpoint, including such data is likely to skew our data rightward where there are less fatal accidents present which could cushion a substantial amount of our analysis.
+                From a practical standpoint, it is highly likely that as people make more money and are able to afford better vehicles that have greater safety features which may skew some of our future analysis.
+                After excluding these values, the cleaned dataset looks as follows:
+                <div>
+                    <style scoped>
+                        .dataframe tbody tr th:only-of-type {
+                            vertical-align: middle;
+                        }
+                    
+                        .dataframe tbody tr th {
+                            vertical-align: top;
+                        }
+                    
+                        .dataframe thead th {
+                            text-align: right;
+                        }
+                    </style>
+                    <table border="1" class="dataframe">
+                      <thead>
+                        <tr style="text-align: right;">
+                          <th></th>
+                          <th>ARR_HOUR</th>
+                          <th>ARR_HOURNAME</th>
+                          <th>ARR_MIN</th>
+                          <th>ARR_MINNAME</th>
+                          <th>CITYNAME</th>
+                          <th>COUNTYNAME</th>
+                          <th>CaseYear</th>
+                          <th>DAY</th>
+                          <th>DAY_WEEK</th>
+                          <th>DAY_WEEKNAME</th>
+                          <th>...</th>
+                          <th>TWAY_ID</th>
+                          <th>TWAY_ID2</th>
+                          <th>TYP_INTNAME</th>
+                          <th>VE_FORMS</th>
+                          <th>VE_TOTAL</th>
+                          <th>WEATHER</th>
+                          <th>WEATHERNAME</th>
+                          <th>WRK_ZONENAME</th>
+                          <th>YEAR</th>
+                          <th>COUNTYINCOME</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>0</th>
+                          <td>22</td>
+                          <td>10:00pm-10:59pm</td>
+                          <td>25</td>
+                          <td>25</td>
+                          <td>NOT APPLICABLE</td>
+                          <td>st. clair</td>
+                          <td>2021</td>
+                          <td>12</td>
+                          <td>6</td>
+                          <td>Friday</td>
+                          <td>...</td>
+                          <td>I-20</td>
+                          <td>NaN</td>
+                          <td>Not an Intersection</td>
+                          <td>2</td>
+                          <td>2</td>
+                          <td>2</td>
+                          <td>Rain</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                          <td>47088.0</td>
+                        </tr>
+                        <tr>
+                          <th>1</th>
+                          <td>22</td>
+                          <td>10:00pm-10:59pm</td>
+                          <td>25</td>
+                          <td>25</td>
+                          <td>NOT APPLICABLE</td>
+                          <td>st. clair</td>
+                          <td>2021</td>
+                          <td>12</td>
+                          <td>6</td>
+                          <td>Friday</td>
+                          <td>...</td>
+                          <td>I-20</td>
+                          <td>NaN</td>
+                          <td>Not an Intersection</td>
+                          <td>2</td>
+                          <td>2</td>
+                          <td>2</td>
+                          <td>Rain</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                          <td>54909.0</td>
+                        </tr>
+                        <tr>
+                          <th>2</th>
+                          <td>22</td>
+                          <td>10:00pm-10:59pm</td>
+                          <td>25</td>
+                          <td>25</td>
+                          <td>NOT APPLICABLE</td>
+                          <td>st. clair</td>
+                          <td>2021</td>
+                          <td>12</td>
+                          <td>6</td>
+                          <td>Friday</td>
+                          <td>...</td>
+                          <td>I-20</td>
+                          <td>NaN</td>
+                          <td>Not an Intersection</td>
+                          <td>2</td>
+                          <td>2</td>
+                          <td>2</td>
+                          <td>Rain</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                          <td>52388.0</td>
+                        </tr>
+                        <tr>
+                          <th>3</th>
+                          <td>22</td>
+                          <td>10:00pm-10:59pm</td>
+                          <td>25</td>
+                          <td>25</td>
+                          <td>NOT APPLICABLE</td>
+                          <td>st. clair</td>
+                          <td>2021</td>
+                          <td>12</td>
+                          <td>6</td>
+                          <td>Friday</td>
+                          <td>...</td>
+                          <td>I-20</td>
+                          <td>NaN</td>
+                          <td>Not an Intersection</td>
+                          <td>2</td>
+                          <td>2</td>
+                          <td>2</td>
+                          <td>Rain</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                          <td>36989.0</td>
+                        </tr>
+                        <tr>
+                          <th>4</th>
+                          <td>19</td>
+                          <td>7:00pm-7:59pm</td>
+                          <td>9</td>
+                          <td>9</td>
+                          <td>NOT APPLICABLE</td>
+                          <td>jefferson</td>
+                          <td>2021</td>
+                          <td>11</td>
+                          <td>5</td>
+                          <td>Thursday</td>
+                          <td>...</td>
+                          <td>I-459</td>
+                          <td>NaN</td>
+                          <td>Not an Intersection</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>2</td>
+                          <td>Rain</td>
+                          <td>NaN</td>
+                          <td>2021</td>
+                          <td>64006.0</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p>5 rows × 58 columns</p>
+                    </div>
+            </p>
+            <p>
+                With these values now excluded, it is possible to continue with analysis. 
+                Looking to the data that is still readily available, we can evaluate how cars interact in accidents.
+                Understanding this data will allow furhter investigation into the necessary safety features for vehicles based on location.
+                The plot below simulates a vehicle moving in the 12 clock direction with the size of the line coming off of it demonstrating the quantity of accidents on that point of the vehicle.
+                This may suggest a further look into the models and safety features available on the front of a vehicle and its' impact on fatal accidents.
+                Looking to the graph, it is evident that most accidents occur head on, or at the 12 Clock Position, followed by being rear-ended or t-boned in no particular order.
+                <img src = ".\plots\impact_point.png" alt = 'impact point' class = center>
             </p>
         </div>
     </body>

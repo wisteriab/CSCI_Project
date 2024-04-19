@@ -185,3 +185,151 @@ fatal_incident = fatal_incident[fatal_incident['COUNTYINCOME'].notna()]
 fatal_incident = fatal_incident[fatal_incident['COUNTYINCOME'] <= outlier]
 
 fatal_incident.to_csv('..\data\data-clean\\fatal_incidents_by_county.csv')
+
+# data for modelling
+
+data = pd.read_csv('..\data\data-clean\\accident_data_2021.csv', index_col = 0)
+hit_runmap = {'No': 0, 'Yes':1}
+data.HIT_RUNNAME = data.HIT_RUNNAME.map(hit_runmap)
+#LICENSE REQ FOR VEHICLE
+license_map = {3:0, 2:1, 0:1, 9:0, 6:0, 1:0, 8:0}
+data.L_COMPL = data.L_COMPL.map(license_map)
+# LICENSE VIOLATION = 1 \\ NO VIOLATION = 0
+valid_map = {'Valid': 0, 
+            'Not licensed': 1, 
+            'Suspended': 1, 
+            'Unknown License Status': 0, 
+            'Expired': 1, 
+            'Revoked': 1, 
+            'No Driver Present/Unknown if Driver Present': 0, 
+            'Canceled or denied': 1
+}
+data.L_STATUSNAME = data.L_STATUSNAME.map(valid_map)
+data.OWNER = data.OWNER.replace(9,0)
+data.NUMOCCS = data.NUMOCCS.replace(99, 0)
+#Rollover = 1 else = 0
+roll_map = {
+    'No Rollover':0,
+    'On Roadside':1,
+    'On Roadway':1,
+    'On Median/Separator':1,
+    'Outside of Trafficway':1,
+    'On Shoulder':1,
+    'Unknown':0,
+    'In Gore':1,
+    'In Parking Lane/Zone':1
+}
+data.ROLINLOCNAME = data.ROLINLOCNAME.map(roll_map)
+#Speeding = 1 else = 0
+speed_map ={
+    'No': 0,
+    'Yes, Too Fast for Conditions':1,
+    'Yes, Exceeded Speed Limit': 1,
+    'Reported as Unknown': 0,
+    'Yes, Specifics Unknown':1,
+    'No Driver Present/Unknown if Driver Present': 0,
+    'Yes, Racing':1
+}
+data.SPEEDRELNAME = data.SPEEDRELNAME.map(speed_map)
+#TOWED = 1 ELSE = 0
+tow_map = {
+    'Towed Due to Disabling Damage' :1,
+    'Not Towed': 0,
+    'Towed, Unknown Reason': 1,
+    'Towed But Not Due to Disabling Damage': 1,
+    'Not Reported' : 0,
+    'Reported as Unknown': 0
+}
+data.TOWEDNAME = data.TOWEDNAME.map(tow_map)
+data = data.dropna(subset = ['TRAV_SP'])
+data = data[data['TRAV_SP']<= 152]
+#drinking = 1 else 0
+drink_map = {
+    'No':0,
+    'Yes':1
+}
+data.DR_DRINKNAME = data.DR_DRINKNAME.map(drink_map)
+damage_map = {
+    'Disabling Damage' : 2,
+    'Functional Damage' : 1,
+    'Minor Damage' : 0,
+    'Not Reported' : 0,
+    'No Damage' : 0,
+    'Reported as Unknown' : 0
+}
+data.DEFORMEDNAME = data.DEFORMEDNAME.map(damage_map)
+vehicle_weight_map = {
+    'Class 1: 6,000 lbs. or less (2,722 kg or less)' : 1,
+    'Class 2: 6,001 - 10,000 lbs. (2,722 - 4,536 kg)' : 2,
+    'Class 3: 10,001 - 14,000 lbs. (4,536 - 6,350 kg)' : 3,
+    'Class 4: 14,001 - 16,000 lbs. (6,350 - 7,258 kg)' : 4,
+    'Class 5: 16,001 - 19,500 lbs. (7,258 - 8,845 kg)' : 5,
+    'Class 6: 19,501 - 26,000 lbs. (8,845 - 11,794 kg)' : 6,
+    'Class 7: 26,001 - 33,000 lbs. (11,794 - 14,969 kg)' : 7,
+    'Class 8: 33,001 lbs. and above (14,969 kg and above)' : 8,
+    'Reported as Unknown' : 0,
+    'Not Reported' : 0
+}
+data.GVWR_FROMNAME = data.GVWR_FROMNAME.map(vehicle_weight_map)
+data.GVWR_TONAME = data.GVWR_TONAME.map(vehicle_weight_map)
+
+data_noncat = data.drop(columns = ['DR_HGT',
+                                  'DR_PRES', 
+                                  'DR_PRESNAME', 
+                                  'DR_WGT', 
+                                  'FIRST_MO', 
+                                  'FIRST_MONAME', 
+                                  'FIRST_YR', 
+                                  'FIRST_YRNAME', 
+                                  'HARM_EVNAME', 
+                                  'ICFINALBODYNAME', 
+                                  'IMPACT1', 
+                                  'IMPACT1NAME', 
+                                  'IMPACT2', 
+                                  'IMPACT2NAME', 
+                                  'LAST_MO', 
+                                  'LAST_MONAME', 
+                                  'LAST_YR', 
+                                  'L_ENDORS', 
+                                  'L_COMPLNAME', 
+                                  'L_ENDORSNAME', 
+                                  'L_RESTRI', 
+                                  'L_RESTRINAME', 
+                                  'L_STATE', 
+                                  'L_STATENAME', 
+                                  'L_TYPENAME', 
+                                  'MAN_COLLNAME', 
+                                  'MINUTE', 
+                                  'MINUTENAME', 
+                                  'MODELNAME', 
+                                  'MONTH', 
+                                  'MONTHNAME', 
+                                  'M_HARMNAME', 
+                                  'OWNERNAME',
+                                  'PCRASH4NAME', 
+                                  'PCRASH5NAME', 
+                                  'P_CRASH1NAME', 
+                                  'P_CRASH2NAME', 
+                                  'P_CRASH3NAME', 
+                                  'REG_STAT', 
+                                  'REG_STATNAME', 
+                                  'STATE', 
+                                  'STATENAME', 
+                                  'ST_CASE', 
+                                  'TOW_VEH', 
+                                  'TOW_VEHNAME',
+                                  'TRLR1GVWR', 
+                                  'TRLR1GVWRNAME', 
+                                  'VIN', 
+                                  'VNUM_LAN', 
+                                  'VNUM_LANNAME', 
+                                  'VPAVETYPNAME', 
+                                  'VPICMODELNAME', 
+                                  'VPROFILENAME', 
+                                  'VSURCONDNAME', 
+                                  'VTCONT_FNAME', 
+                                  'VTRAFCONNAME', 
+                                  'VTRAFWAYNAME', 
+                                  'V_CONFIGNAME']
+)
+data.to_csv('..\data\data-clean\modelling_data.csv')

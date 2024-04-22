@@ -85,7 +85,6 @@
                 <table border="1" class="dataframe">
                   <thead>
                     <tr style="text-align: right;">
-                      <th></th>
                       <th>DAY</th>
                       <th>DEATHS</th>
                       <th>DEFORMEDNAME</th>
@@ -170,7 +169,6 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <th>0</th>
                       <td>12</td>
                       <td>1</td>
                       <td>Disabling Damage</td>
@@ -253,7 +251,6 @@
                       <td>Not Applicable</td>
                     </tr>
                     <tr>
-                      <th>1</th>
                       <td>12</td>
                       <td>1</td>
                       <td>Disabling Damage</td>
@@ -336,7 +333,6 @@
                       <td>Not Applicable</td>
                     </tr>
                     <tr>
-                      <th>2</th>
                       <td>11</td>
                       <td>2</td>
                       <td>Disabling Damage</td>
@@ -419,7 +415,6 @@
                       <td>Not Applicable</td>
                     </tr>
                     <tr>
-                      <th>3</th>
                       <td>7</td>
                       <td>0</td>
                       <td>Functional Damage</td>
@@ -502,7 +497,6 @@
                       <td>Not Applicable</td>
                     </tr>
                     <tr>
-                      <th>4</th>
                       <td>3</td>
                       <td>1</td>
                       <td>Disabling Damage</td>
@@ -594,179 +588,570 @@
                 With this in mind, a master data table was created to be used amongst the following 4 models.
                 It is important to note, however, that not every feature present in this data table is present in each of the models, however, and discretion was used for each one to apply features necessary for the question at hand.
                 In this master model dataset, quantitative data was maintained and many of the categorical columns from the dataset above were translated to ordinal data based upon the codes originally applied by the National Highway Traffic Safety Administration.
+                The only categorical data kept was of the make and model for use in potential classification by type.
+                Model year was also separated into groups of 5 years.
                 Said dataset is sampled below:
             </p>
             <div>
-                <style scoped>
-                    .dataframe tbody tr th:only-of-type {
-                        vertical-align: middle;
-                    }
-                
-                    .dataframe tbody tr th {
-                        vertical-align: top;
-                    }
-                
-                    .dataframe thead th {
-                        text-align: right;
-                    }
-                </style>
-                <table border="1" class="dataframe">
-                  <thead>
-                    <tr style="text-align: right;">
-                      <th></th>
-                      <th>DAY</th>
-                      <th>DEATHS</th>
-                      <th>DEFORMEDNAME</th>
-                      <th>DR_DRINKNAME</th>
-                      <th>DR_ZIP</th>
-                      <th>GVWR_FROMNAME</th>
-                      <th>GVWR_TONAME</th>
-                      <th>HIT_RUNNAME</th>
-                      <th>HOUR</th>
-                      <th>LAST_YRNAME</th>
-                      <th>L_COMPL</th>
-                      <th>L_STATUSNAME</th>
-                      <th>MOD_YEAR</th>
-                      <th>NUMOCCS</th>
-                      <th>OWNER</th>
-                      <th>ROLINLOCNAME</th>
-                      <th>SPEEDRELNAME</th>
-                      <th>TOWEDNAME</th>
-                      <th>TRAV_SP</th>
-                      <th>VPICBODYCLASSNAME</th>
-                      <th>VPICMAKENAME</th>
-                      <th>VSPD_LIM</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>0</th>
-                      <td>12</td>
-                      <td>1</td>
-                      <td>2</td>
-                      <td>0</td>
-                      <td>33060</td>
-                      <td>1.0</td>
-                      <td>1</td>
-                      <td>0</td>
-                      <td>22</td>
-                      <td>2020</td>
-                      <td>1</td>
-                      <td>1</td>
-                      <td>2016</td>
-                      <td>2</td>
-                      <td>1</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>1</td>
-                      <td>85.0</td>
-                      <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
-                      <td>Jeep</td>
-                      <td>70</td>
-                    </tr>
-                    <tr>
-                      <th>1</th>
-                      <td>12</td>
-                      <td>1</td>
-                      <td>2</td>
-                      <td>0</td>
-                      <td>30316</td>
-                      <td>1.0</td>
-                      <td>1</td>
-                      <td>0</td>
-                      <td>22</td>
-                      <td>No Record</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>2021</td>
-                      <td>1</td>
-                      <td>1</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>1</td>
-                      <td>70.0</td>
-                      <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
-                      <td>Volvo</td>
-                      <td>70</td>
-                    </tr>
-                    <tr>
-                      <th>2</th>
-                      <td>11</td>
-                      <td>2</td>
-                      <td>2</td>
-                      <td>0</td>
-                      <td>36116</td>
-                      <td>1.0</td>
-                      <td>1</td>
-                      <td>0</td>
-                      <td>18</td>
-                      <td>2020</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>2004</td>
-                      <td>2</td>
-                      <td>1</td>
-                      <td>0</td>
-                      <td>1</td>
-                      <td>1</td>
-                      <td>100.0</td>
-                      <td>Sedan/Saloon</td>
-                      <td>Lexus</td>
-                      <td>70</td>
-                    </tr>
-                    <tr>
-                      <th>3</th>
-                      <td>7</td>
-                      <td>0</td>
-                      <td>1</td>
-                      <td>0</td>
-                      <td>35405</td>
-                      <td>1.0</td>
-                      <td>1</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>2018</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>2009</td>
-                      <td>1</td>
-                      <td>2</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>70.0</td>
-                      <td>Sedan/Saloon</td>
-                      <td>Toyota</td>
-                      <td>70</td>
-                    </tr>
-                    <tr>
-                      <th>5</th>
-                      <td>30</td>
-                      <td>1</td>
-                      <td>2</td>
-                      <td>1</td>
-                      <td>35180</td>
-                      <td>2.0</td>
-                      <td>2</td>
-                      <td>0</td>
-                      <td>22</td>
-                      <td>No Record</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>1998</td>
-                      <td>1</td>
-                      <td>2</td>
-                      <td>1</td>
-                      <td>1</td>
-                      <td>1</td>
-                      <td>100.0</td>
-                      <td>Pickup</td>
-                      <td>Dodge</td>
-                      <td>70</td>
-                    </tr>
-                  </tbody>
-                </table>
-                </div>
+              <style scoped>
+                  .dataframe tbody tr th:only-of-type {
+                      vertical-align: middle;
+                  }
+              
+                  .dataframe tbody tr th {
+                      vertical-align: top;
+                  }
+              
+                  .dataframe thead th {
+                      text-align: right;
+                  }
+              </style>
+              <table border="1" class="dataframe">
+                <thead>
+                  <tr style="text-align: right;">
+                    <th>DEATHS</th>
+                    <th>DR_DRINK</th>
+                    <th>DR_HGT</th>
+                    <th>DR_WGT</th>
+                    <th>HIT_RUNNAME</th>
+                    <th>TRAV_SP</th>
+                    <th>HOUR</th>
+                    <th>MOD_YEAR</th>
+                    <th>MODELNAME</th>
+                    <th>VSPD_LIM</th>
+                    <th>VPICBODYCLASSNAME</th>
+                    <th>NUMOCCS</th>
+                    <th>MAKENAME</th>
+                    <th>MOD_YEAR_5YR_CHUNK</th>
+                    <th>DEATHOCCURRED</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>67</td>
+                    <td>145</td>
+                    <td>0</td>
+                    <td>80</td>
+                    <td>2</td>
+                    <td>1997</td>
+                    <td>ES-250/300/300h/330/ 350</td>
+                    <td>45</td>
+                    <td>Sedan/Saloon</td>
+                    <td>4</td>
+                    <td>Lexus</td>
+                    <td>1995</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>67</td>
+                    <td>215</td>
+                    <td>0</td>
+                    <td>70</td>
+                    <td>14</td>
+                    <td>1995</td>
+                    <td>Camry</td>
+                    <td>65</td>
+                    <td>Sedan/Saloon</td>
+                    <td>1</td>
+                    <td>Toyota</td>
+                    <td>1995</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>73</td>
+                    <td>133</td>
+                    <td>0</td>
+                    <td>80</td>
+                    <td>15</td>
+                    <td>2007</td>
+                    <td>Azera  (For 2018 on, code as vehicle model 398)</td>
+                    <td>35</td>
+                    <td>Sedan/Saloon</td>
+                    <td>5</td>
+                    <td>Hyundai</td>
+                    <td>2005</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>64</td>
+                    <td>115</td>
+                    <td>0</td>
+                    <td>70</td>
+                    <td>0</td>
+                    <td>2013</td>
+                    <td>Suburban/Yukon XL (2004 on; see 431 for 1950- ...</td>
+                    <td>45</td>
+                    <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
+                    <td>1</td>
+                    <td>GMC</td>
+                    <td>2015</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>71</td>
+                    <td>185</td>
+                    <td>0</td>
+                    <td>55</td>
+                    <td>16</td>
+                    <td>2005</td>
+                    <td>Mustang/Mustang II</td>
+                    <td>55</td>
+                    <td>Coupe</td>
+                    <td>1</td>
+                    <td>Ford</td>
+                    <td>2005</td>
+                    <td>1</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+          <h2>Model Implementation</h2>
+            <p>
+            Our first models implemented compared sklearn's support vector classification's SVC and linear SVC models to classify the body type of vehicles involved in fatal accidents.
+            In order to use these two model types <i>and normalize the data</i> only quantifiable features were allowed to be passed. 
+            As such, the above dataset was further modified to one hot encode the make of vehicles present. 
+            Furthermore, the deathoccurred column was dropped to prevent multicollinearity and the specific model column was dropped as it passed far too many classifications to be of value.
+            As there were multiple dimensions of varying magnitude, this data was first split into a training and test set and immediately normalized such that the difference in magnitudes did not favor some features over others.
+            Normalizing the data after splitting in this way prevented data leakage from occurring while still enabling a way for standardization to occur.
+            The final trained does not include the target column VPICBODYCLASSNAME which is the body style of the vehicles present. 
+            7 body type classes targetted are Sedan/Saloon, SUV, Pickup, Motorcycle, Coupe, Hatchback, and Minivan.
+            Said training dataset looks as follows prior to normalization:
+            </p>
+            <div>
+              <style scoped>
+                  .dataframe tbody tr th:only-of-type {
+                      vertical-align: middle;
+                  }
+              
+                  .dataframe tbody tr th {
+                      vertical-align: top;
+                  }
+              
+                  .dataframe thead th {
+                      text-align: right;
+                  }
+              </style>
+              <table border="1" class="dataframe">
+                <thead>
+                  <tr style="text-align: right;">
+                    <th>DEATHS</th>
+                    <th>DR_DRINK</th>
+                    <th>DR_HGT</th>
+                    <th>DR_WGT</th>
+                    <th>HIT_RUNNAME</th>
+                    <th>TRAV_SP</th>
+                    <th>HOUR</th>
+                    <th>MOD_YEAR</th>
+                    <th>VSPD_LIM</th>
+                    <th>NUMOCCS</th>
+                    <th>MOD_YEAR_5YR_CHUNK</th>
+                    <th>MAKENAME_AM General</th>
+                    <th>MAKENAME_Acura</th>
+                    <th>MAKENAME_Audi</th>
+                    <th>MAKENAME_BMW</th>
+                    <th>MAKENAME_Buick / Opel</th>
+                    <th>MAKENAME_Cadillac</th>
+                    <th>MAKENAME_Chevrolet</th>
+                    <th>MAKENAME_Chrysler</th>
+                    <th>MAKENAME_Dodge</th>
+                    <th>MAKENAME_Ducati</th>
+                    <th>MAKENAME_Fiat</th>
+                    <th>MAKENAME_Ford</th>
+                    <th>MAKENAME_GMC</th>
+                    <th>MAKENAME_Harley-Davidson</th>
+                    <th>MAKENAME_Honda</th>
+                    <th>MAKENAME_Hyundai</th>
+                    <th>MAKENAME_Infiniti</th>
+                    <th>MAKENAME_Isuzu</th>
+                    <th>MAKENAME_Jaguar</th>
+                    <th>MAKENAME_Jeep / Kaiser-Jeep / Willys- Jeep</th>
+                    <th>MAKENAME_KIA</th>
+                    <th>MAKENAME_Kawasaki</th>
+                    <th>MAKENAME_Land Rover</th>
+                    <th>MAKENAME_Lexus</th>
+                    <th>MAKENAME_Lincoln</th>
+                    <th>MAKENAME_Mazda</th>
+                    <th>MAKENAME_Mercedes-Benz</th>
+                    <th>MAKENAME_Mercury</th>
+                    <th>MAKENAME_Mitsubishi</th>
+                    <th>MAKENAME_Nissan/Datsun</th>
+                    <th>MAKENAME_Oldsmobile</th>
+                    <th>MAKENAME_Pontiac</th>
+                    <th>MAKENAME_Porsche</th>
+                    <th>MAKENAME_Saab</th>
+                    <th>MAKENAME_Saturn</th>
+                    <th>MAKENAME_Scion</th>
+                    <th>MAKENAME_Subaru</th>
+                    <th>MAKENAME_Suzuki</th>
+                    <th>MAKENAME_Toyota</th>
+                    <th>MAKENAME_Triumph</th>
+                    <th>MAKENAME_Victory</th>
+                    <th>MAKENAME_Volkswagen</th>
+                    <th>MAKENAME_Volvo</th>
+                    <th>MAKENAME_Yamaha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>67</td>
+                    <td>145</td>
+                    <td>0</td>
+                    <td>80</td>
+                    <td>2</td>
+                    <td>1997</td>
+                    <td>45</td>
+                    <td>4</td>
+                    <td>1995</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>67</td>
+                    <td>215</td>
+                    <td>0</td>
+                    <td>70</td>
+                    <td>14</td>
+                    <td>1995</td>
+                    <td>65</td>
+                    <td>1</td>
+                    <td>1995</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>73</td>
+                    <td>133</td>
+                    <td>0</td>
+                    <td>80</td>
+                    <td>15</td>
+                    <td>2007</td>
+                    <td>35</td>
+                    <td>5</td>
+                    <td>2005</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>64</td>
+                    <td>115</td>
+                    <td>0</td>
+                    <td>70</td>
+                    <td>0</td>
+                    <td>2013</td>
+                    <td>45</td>
+                    <td>1</td>
+                    <td>2015</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>71</td>
+                    <td>185</td>
+                    <td>0</td>
+                    <td>55</td>
+                    <td>16</td>
+                    <td>2005</td>
+                    <td>55</td>
+                    <td>1</td>
+                    <td>2005</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+            <p>
+              Considering the high dimensionality in the above dataset, another set of the same two models were implemented on a reduced version of the dataset that excluded any information on the make type.
+              This ultimately reduced the net number of features (according to the model) from 55 to 11 as the one-hot-encoded car model types were now eliminated.
+              Following fitting and implementing these 4 models on the training data, they were then tested according to the accuracy, recall, precision and f1 scores to compare effectiveness of the model in classifying vehicle types present in a fatal accident.
+              These scores are included below:
+            </p>
+            <div>
+              <style scoped>
+                  .dataframe tbody tr th:only-of-type {
+                      vertical-align: middle;
+                  }
+              
+                  .dataframe tbody tr th {
+                      vertical-align: top;
+                  }
+              
+                  .dataframe thead th {
+                      text-align: right;
+                  }
+              </style>
+              <table border="1" class="dataframe">
+                <thead>
+                  <tr style="text-align: right;">
+                    <th>Model Type</th>
+                    <th>Accuracy Score</th>
+                    <th>Precision Score</th>
+                    <th>Recall Score</th>
+                    <th>F1 Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>SVC</td>
+                    <td>2533.0</td>
+                    <td>0.579501</td>
+                    <td>0.579501</td>
+                    <td>0.579501</td>
+                  </tr>
+                  <tr>
+                    <td>Linear SVC</td>
+                    <td>2538.0</td>
+                    <td>0.580645</td>
+                    <td>0.580645</td>
+                    <td>0.580645</td>
+                  </tr>
+                  <tr>
+                    <td>Reduced SVC</td>
+                    <td>1541.0</td>
+                    <td>0.352551</td>
+                    <td>0.352551</td>
+                    <td>0.352551</td>
+                  </tr>
+                  <tr>
+                    <td>Reduced Linear SVC</td>
+                    <td>1578.0</td>
+                    <td>0.361016</td>
+                    <td>0.361016</td>
+                    <td>0.361016</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
             <p>
 
             </p>

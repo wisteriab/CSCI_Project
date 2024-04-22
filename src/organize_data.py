@@ -332,4 +332,4 @@ data_noncat = data.drop(columns = ['DR_HGT',
                                   'VTRAFWAYNAME', 
                                   'V_CONFIGNAME']
 )
-data.to_csv('..\data\data-clean\modelling_data.csv')
+data_noncat.to_csv('..\data\data-clean\modelling_data.csv')

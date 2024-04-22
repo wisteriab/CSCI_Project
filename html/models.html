@@ -31,21 +31,744 @@
                 color: khaki;
             }
 
+            p {
+                text-indent: 50px;
+                line-height: 1.2;
+                text-align: justify;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+            }
+
         </style>
     </head>
     <body>
         <div class = "navbar">
-            <a href ="./index.html">Home</a>
+            <a href ="../index.html">Home</a>
             <a href = "./introduction.html">Introduction</a>
             <a href = "./data_collection_and_scraping.html">Data Exploration</a>
             <a class = "active" href = "./models.html">Models Implemented</a>
             <a href = './conclusions.html'>Conclusions</a>
             <a href = "./Resources.html">Resources</a>
         </div>
-        <div style = "padding: 14px 16px">
-            <h1>Home_Title</h1>
+        <div style ="margin: 50px 200px 50px">
+            <h1>Models Implemented</h1>
+            <h2>Further cleaning</h2>
             <p>
-                Introductory Content
+                Following preliminary data exploration and cleaning as seen in the data exploration section, further data cleaning was necessary for use in model development.
+                Our immediate goal was to eliminate excess columns that contained data irrelevant to the questions at hand and data that was not able to be translated from categorical to ordinal or quantitative.
+                The original data after preliminary cleaning, while still maintained both valuable and necessary information was simply too unruly to use in model development.
+                Prior to applying these two generic rules, the data looked as follows.
+            </p>
+            <div>
+                <style scoped>
+                    .dataframe tbody tr th:only-of-type {
+                        vertical-align: middle;
+                    }
+                
+                    .dataframe tbody tr th {
+                        vertical-align: top;
+                    }
+                
+                    .dataframe thead th {
+                        text-align: right;
+                    }
+                </style>
+                <table border="1" class="dataframe">
+                  <thead>
+                    <tr style="text-align: right;">
+                      <th></th>
+                      <th>DAY</th>
+                      <th>DEATHS</th>
+                      <th>DEFORMEDNAME</th>
+                      <th>DR_DRINKNAME</th>
+                      <th>DR_HGT</th>
+                      <th>DR_PRES</th>
+                      <th>DR_PRESNAME</th>
+                      <th>DR_WGT</th>
+                      <th>DR_ZIP</th>
+                      <th>FIRST_MO</th>
+                      <th>FIRST_MONAME</th>
+                      <th>FIRST_YR</th>
+                      <th>FIRST_YRNAME</th>
+                      <th>GVWR_FROMNAME</th>
+                      <th>GVWR_TONAME</th>
+                      <th>HARM_EVNAME</th>
+                      <th>HIT_RUNNAME</th>
+                      <th>HOUR</th>
+                      <th>ICFINALBODYNAME</th>
+                      <th>IMPACT1</th>
+                      <th>IMPACT1NAME</th>
+                      <th>IMPACT2</th>
+                      <th>IMPACT2NAME</th>
+                      <th>LAST_MO</th>
+                      <th>LAST_MONAME</th>
+                      <th>LAST_YR</th>
+                      <th>LAST_YRNAME</th>
+                      <th>L_COMPL</th>
+                      <th>L_COMPLNAME</th>
+                      <th>L_ENDORS</th>
+                      <th>L_ENDORSNAME</th>
+                      <th>L_RESTRI</th>
+                      <th>L_RESTRINAME</th>
+                      <th>L_STATE</th>
+                      <th>L_STATENAME</th>
+                      <th>L_STATUSNAME</th>
+                      <th>L_TYPENAME</th>
+                      <th>MAN_COLLNAME</th>
+                      <th>MINUTE</th>
+                      <th>MINUTENAME</th>
+                      <th>MODELNAME</th>
+                      <th>MOD_YEAR</th>
+                      <th>MONTH</th>
+                      <th>MONTHNAME</th>
+                      <th>M_HARMNAME</th>
+                      <th>NUMOCCS</th>
+                      <th>OWNER</th>
+                      <th>OWNERNAME</th>
+                      <th>PCRASH4NAME</th>
+                      <th>PCRASH5NAME</th>
+                      <th>P_CRASH1NAME</th>
+                      <th>P_CRASH2NAME</th>
+                      <th>P_CRASH3NAME</th>
+                      <th>REG_STAT</th>
+                      <th>REG_STATNAME</th>
+                      <th>ROLINLOCNAME</th>
+                      <th>SPEEDRELNAME</th>
+                      <th>STATE</th>
+                      <th>STATENAME</th>
+                      <th>ST_CASE</th>
+                      <th>TOWEDNAME</th>
+                      <th>TOW_VEH</th>
+                      <th>TOW_VEHNAME</th>
+                      <th>TRAV_SP</th>
+                      <th>TRLR1GVWR</th>
+                      <th>TRLR1GVWRNAME</th>
+                      <th>VIN</th>
+                      <th>VNUM_LAN</th>
+                      <th>VNUM_LANNAME</th>
+                      <th>VPAVETYPNAME</th>
+                      <th>VPICBODYCLASSNAME</th>
+                      <th>VPICMAKENAME</th>
+                      <th>VPICMODELNAME</th>
+                      <th>VPROFILENAME</th>
+                      <th>VSPD_LIM</th>
+                      <th>VSURCONDNAME</th>
+                      <th>VTCONT_FNAME</th>
+                      <th>VTRAFCONNAME</th>
+                      <th>VTRAFWAYNAME</th>
+                      <th>V_CONFIGNAME</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>0</th>
+                      <td>12</td>
+                      <td>1</td>
+                      <td>Disabling Damage</td>
+                      <td>No</td>
+                      <td>70.0</td>
+                      <td>1</td>
+                      <td>Yes</td>
+                      <td>NaN</td>
+                      <td>33060</td>
+                      <td>2</td>
+                      <td>February</td>
+                      <td>2020</td>
+                      <td>2020</td>
+                      <td>Class 1: 6,000 lbs. or less (2,722 kg or less)</td>
+                      <td>Class 1: 6,000 lbs. or less (2,722 kg or less)</td>
+                      <td>Motor Vehicle In-Transport</td>
+                      <td>No</td>
+                      <td>22</td>
+                      <td>Not Applicable</td>
+                      <td>12</td>
+                      <td>12 Clock Point</td>
+                      <td>NaN</td>
+                      <td>NaN</td>
+                      <td>4</td>
+                      <td>April</td>
+                      <td>2020</td>
+                      <td>2020</td>
+                      <td>2</td>
+                      <td>No valid license for this class vehicle</td>
+                      <td>0</td>
+                      <td>No Endorsements required for this vehicle</td>
+                      <td>0</td>
+                      <td>No Restrictions or Not Applicable</td>
+                      <td>12</td>
+                      <td>FL</td>
+                      <td>Suspended</td>
+                      <td>Full Driver License</td>
+                      <td>Front-to-Front</td>
+                      <td>10</td>
+                      <td>10</td>
+                      <td>Patriot</td>
+                      <td>2016</td>
+                      <td>2</td>
+                      <td>February</td>
+                      <td>Motor Vehicle In-Transport</td>
+                      <td>2</td>
+                      <td>1</td>
+                      <td>Driver (in this crash) was  Registered Owner</td>
+                      <td>Tracking</td>
+                      <td>Stayed in original travel lane</td>
+                      <td>Going Straight</td>
+                      <td>Traveling in opposite direction</td>
+                      <td>Unknown/Not Reported</td>
+                      <td>12</td>
+                      <td>Florida</td>
+                      <td>No Rollover</td>
+                      <td>No</td>
+                      <td>1</td>
+                      <td>AL</td>
+                      <td>10001</td>
+                      <td>Towed Due to Disabling Damage</td>
+                      <td>0</td>
+                      <td>No Trailing Units</td>
+                      <td>85.0</td>
+                      <td>77</td>
+                      <td>No Trailing Units</td>
+                      <td>1C4NJRBB4GD5</td>
+                      <td>3</td>
+                      <td>Three lanes</td>
+                      <td>Blacktop, Bituminous, or Asphalt</td>
+                      <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
+                      <td>Jeep</td>
+                      <td>Patriot</td>
+                      <td>Level</td>
+                      <td>70</td>
+                      <td>Wet</td>
+                      <td>No Controls</td>
+                      <td>No Controls</td>
+                      <td>Two-Way,  Divided, Positive  Median Barrier</td>
+                      <td>Not Applicable</td>
+                    </tr>
+                    <tr>
+                      <th>1</th>
+                      <td>12</td>
+                      <td>1</td>
+                      <td>Disabling Damage</td>
+                      <td>No</td>
+                      <td>NaN</td>
+                      <td>1</td>
+                      <td>Yes</td>
+                      <td>NaN</td>
+                      <td>30316</td>
+                      <td>0</td>
+                      <td>No Record</td>
+                      <td>0</td>
+                      <td>No Record</td>
+                      <td>Class 1: 6,000 lbs. or less (2,722 kg or less)</td>
+                      <td>Class 1: 6,000 lbs. or less (2,722 kg or less)</td>
+                      <td>Motor Vehicle In-Transport</td>
+                      <td>No</td>
+                      <td>22</td>
+                      <td>Not Applicable</td>
+                      <td>12</td>
+                      <td>12 Clock Point</td>
+                      <td>NaN</td>
+                      <td>NaN</td>
+                      <td>0</td>
+                      <td>No Record</td>
+                      <td>0</td>
+                      <td>No Record</td>
+                      <td>3</td>
+                      <td>Valid license for this class vehicle</td>
+                      <td>0</td>
+                      <td>No Endorsements required for this vehicle</td>
+                      <td>0</td>
+                      <td>No Restrictions or Not Applicable</td>
+                      <td>13</td>
+                      <td>GA</td>
+                      <td>Valid</td>
+                      <td>Full Driver License</td>
+                      <td>Front-to-Front</td>
+                      <td>10</td>
+                      <td>10</td>
+                      <td>XC60 (For 2019 on.  For model years 2008-2018,...</td>
+                      <td>2021</td>
+                      <td>2</td>
+                      <td>February</td>
+                      <td>Motor Vehicle In-Transport</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>Driver (in this crash) was  Registered Owner</td>
+                      <td>Tracking</td>
+                      <td>Stayed in original travel lane</td>
+                      <td>Going Straight</td>
+                      <td>Traveling in opposite direction</td>
+                      <td>Unknown/Not Reported</td>
+                      <td>13</td>
+                      <td>Georgia</td>
+                      <td>No Rollover</td>
+                      <td>No</td>
+                      <td>1</td>
+                      <td>AL</td>
+                      <td>10001</td>
+                      <td>Towed Due to Disabling Damage</td>
+                      <td>0</td>
+                      <td>No Trailing Units</td>
+                      <td>70.0</td>
+                      <td>77</td>
+                      <td>No Trailing Units</td>
+                      <td>YV4102DK2M16</td>
+                      <td>3</td>
+                      <td>Three lanes</td>
+                      <td>Blacktop, Bituminous, or Asphalt</td>
+                      <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
+                      <td>Volvo</td>
+                      <td>XC60</td>
+                      <td>Level</td>
+                      <td>70</td>
+                      <td>Wet</td>
+                      <td>No Controls</td>
+                      <td>No Controls</td>
+                      <td>Two-Way,  Divided, Positive  Median Barrier</td>
+                      <td>Not Applicable</td>
+                    </tr>
+                    <tr>
+                      <th>2</th>
+                      <td>11</td>
+                      <td>2</td>
+                      <td>Disabling Damage</td>
+                      <td>No</td>
+                      <td>65.0</td>
+                      <td>1</td>
+                      <td>Yes</td>
+                      <td>190.0</td>
+                      <td>36116</td>
+                      <td>1</td>
+                      <td>January</td>
+                      <td>2020</td>
+                      <td>2020</td>
+                      <td>Class 1: 6,000 lbs. or less (2,722 kg or less)</td>
+                      <td>Class 1: 6,000 lbs. or less (2,722 kg or less)</td>
+                      <td>Concrete Traffic Barrier</td>
+                      <td>No</td>
+                      <td>18</td>
+                      <td>Not Applicable</td>
+                      <td>11</td>
+                      <td>11 Clock Point</td>
+                      <td>NaN</td>
+                      <td>NaN</td>
+                      <td>1</td>
+                      <td>January</td>
+                      <td>2020</td>
+                      <td>2020</td>
+                      <td>3</td>
+                      <td>Valid license for this class vehicle</td>
+                      <td>0</td>
+                      <td>No Endorsements required for this vehicle</td>
+                      <td>1</td>
+                      <td>Restrictions Complied With</td>
+                      <td>1</td>
+                      <td>AL</td>
+                      <td>Valid</td>
+                      <td>Full Driver License</td>
+                      <td>The First Harmful Event was Not a Collision wi...</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>ES-250/300/300h/330/ 350</td>
+                      <td>2004</td>
+                      <td>2</td>
+                      <td>February</td>
+                      <td>Utility Pole/Light Support</td>
+                      <td>2</td>
+                      <td>1</td>
+                      <td>Driver (in this crash) was  Registered Owner</td>
+                      <td>Precrash stability unknown</td>
+                      <td>Departed roadway</td>
+                      <td>Going Straight</td>
+                      <td>Traveling Too Fast for Conditions or Road Conf...</td>
+                      <td>Unknown/Not Reported</td>
+                      <td>1</td>
+                      <td>Alabama</td>
+                      <td>No Rollover</td>
+                      <td>Yes, Too Fast for Conditions</td>
+                      <td>1</td>
+                      <td>AL</td>
+                      <td>10002</td>
+                      <td>Towed Due to Disabling Damage</td>
+                      <td>0</td>
+                      <td>No Trailing Units</td>
+                      <td>100.0</td>
+                      <td>77</td>
+                      <td>No Trailing Units</td>
+                      <td>JTHBA30G0450</td>
+                      <td>3</td>
+                      <td>Three lanes</td>
+                      <td>Blacktop, Bituminous, or Asphalt</td>
+                      <td>Sedan/Saloon</td>
+                      <td>Lexus</td>
+                      <td>ES</td>
+                      <td>Level</td>
+                      <td>70</td>
+                      <td>Wet</td>
+                      <td>No Controls</td>
+                      <td>No Controls</td>
+                      <td>Two-Way,  Divided, Positive  Median Barrier</td>
+                      <td>Not Applicable</td>
+                    </tr>
+                    <tr>
+                      <th>3</th>
+                      <td>7</td>
+                      <td>0</td>
+                      <td>Functional Damage</td>
+                      <td>No</td>
+                      <td>65.0</td>
+                      <td>1</td>
+                      <td>Yes</td>
+                      <td>147.0</td>
+                      <td>35405</td>
+                      <td>11</td>
+                      <td>November</td>
+                      <td>2018</td>
+                      <td>2018</td>
+                      <td>Class 1: 6,000 lbs. or less (2,722 kg or less)</td>
+                      <td>Class 1: 6,000 lbs. or less (2,722 kg or less)</td>
+                      <td>Pedestrian</td>
+                      <td>No</td>
+                      <td>0</td>
+                      <td>Not Applicable</td>
+                      <td>12</td>
+                      <td>12 Clock Point</td>
+                      <td>NaN</td>
+                      <td>NaN</td>
+                      <td>11</td>
+                      <td>November</td>
+                      <td>2018</td>
+                      <td>2018</td>
+                      <td>3</td>
+                      <td>Valid license for this class vehicle</td>
+                      <td>0</td>
+                      <td>No Endorsements required for this vehicle</td>
+                      <td>0</td>
+                      <td>No Restrictions or Not Applicable</td>
+                      <td>1</td>
+                      <td>AL</td>
+                      <td>Valid</td>
+                      <td>Full Driver License</td>
+                      <td>The First Harmful Event was Not a Collision wi...</td>
+                      <td>20</td>
+                      <td>20</td>
+                      <td>Camry</td>
+                      <td>2009</td>
+                      <td>2</td>
+                      <td>February</td>
+                      <td>Pedestrian</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>Driver (in this crash) Not Registered Owner (O...</td>
+                      <td>Tracking</td>
+                      <td>Departed roadway</td>
+                      <td>Going Straight</td>
+                      <td>Over the lane line on right side of travel lane</td>
+                      <td>Unknown/Not Reported</td>
+                      <td>1</td>
+                      <td>Alabama</td>
+                      <td>No Rollover</td>
+                      <td>No</td>
+                      <td>1</td>
+                      <td>AL</td>
+                      <td>10003</td>
+                      <td>Not Towed</td>
+                      <td>0</td>
+                      <td>No Trailing Units</td>
+                      <td>70.0</td>
+                      <td>77</td>
+                      <td>No Trailing Units</td>
+                      <td>4T1BE46K99U8</td>
+                      <td>3</td>
+                      <td>Three lanes</td>
+                      <td>Concrete</td>
+                      <td>Sedan/Saloon</td>
+                      <td>Toyota</td>
+                      <td>Camry</td>
+                      <td>Downhill</td>
+                      <td>70</td>
+                      <td>Wet</td>
+                      <td>No Controls</td>
+                      <td>No Controls</td>
+                      <td>Two-Way, Divided, Unprotected Median</td>
+                      <td>Not Applicable</td>
+                    </tr>
+                    <tr>
+                      <th>4</th>
+                      <td>3</td>
+                      <td>1</td>
+                      <td>Disabling Damage</td>
+                      <td>No</td>
+                      <td>72.0</td>
+                      <td>1</td>
+                      <td>Yes</td>
+                      <td>NaN</td>
+                      <td>33127</td>
+                      <td>12</td>
+                      <td>December</td>
+                      <td>2016</td>
+                      <td>2016</td>
+                      <td>Class 1: 6,000 lbs. or less (2,722 kg or less)</td>
+                      <td>Class 1: 6,000 lbs. or less (2,722 kg or less)</td>
+                      <td>Ditch</td>
+                      <td>No</td>
+                      <td>16</td>
+                      <td>Not Applicable</td>
+                      <td>12</td>
+                      <td>12 Clock Point</td>
+                      <td>NaN</td>
+                      <td>NaN</td>
+                      <td>12</td>
+                      <td>December</td>
+                      <td>2016</td>
+                      <td>2016</td>
+                      <td>3</td>
+                      <td>Valid license for this class vehicle</td>
+                      <td>0</td>
+                      <td>No Endorsements required for this vehicle</td>
+                      <td>0</td>
+                      <td>No Restrictions or Not Applicable</td>
+                      <td>12</td>
+                      <td>FL</td>
+                      <td>Valid</td>
+                      <td>Full Driver License</td>
+                      <td>The First Harmful Event was Not a Collision wi...</td>
+                      <td>20</td>
+                      <td>20</td>
+                      <td>QX60</td>
+                      <td>2020</td>
+                      <td>2</td>
+                      <td>February</td>
+                      <td>Tree (Standing Only)</td>
+                      <td>1</td>
+                      <td>0</td>
+                      <td>Not Applicable, Vehicle Not Registered</td>
+                      <td>Precrash stability unknown</td>
+                      <td>Departed roadway</td>
+                      <td>Passing or Overtaking Another Vehicle</td>
+                      <td>Off the edge of the road on the right side</td>
+                      <td>Unknown/Not Reported</td>
+                      <td>12</td>
+                      <td>Florida</td>
+                      <td>No Rollover</td>
+                      <td>No</td>
+                      <td>1</td>
+                      <td>AL</td>
+                      <td>10004</td>
+                      <td>Towed Due to Disabling Damage</td>
+                      <td>0</td>
+                      <td>No Trailing Units</td>
+                      <td>NaN</td>
+                      <td>77</td>
+                      <td>No Trailing Units</td>
+                      <td>5N1DL0MN4LC5</td>
+                      <td>2</td>
+                      <td>Two lanes</td>
+                      <td>Blacktop, Bituminous, or Asphalt</td>
+                      <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
+                      <td>Infiniti</td>
+                      <td>QX60</td>
+                      <td>Level</td>
+                      <td>70</td>
+                      <td>Dry</td>
+                      <td>No Controls</td>
+                      <td>No Controls</td>
+                      <td>Two-Way, Divided, Unprotected Median</td>
+                      <td>Not Applicable</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+            <p>
+                The above table represents the preliminary data table that was used for exploration and general exploratory inquiry.
+                As evidenced by both the data and the sheer size of features present most of this was need to be cut.
+                Not only is it necessary for use in model production, but helps to make the production of these models more efficient as the dimensionality of the model is decreased.
+                With this in mind, a master data table was created to be used amongst the following 4 models.
+                It is important to note, however, that not every feature present in this data table is present in each of the models, however, and discretion was used for each one to apply features necessary for the question at hand.
+                In this master model dataset, quantitative data was maintained and many of the categorical columns from the dataset above were translated to ordinal data based upon the codes originally applied by the National Highway Traffic Safety Administration.
+                Said dataset is sampled below:
+            </p>
+            <div>
+                <style scoped>
+                    .dataframe tbody tr th:only-of-type {
+                        vertical-align: middle;
+                    }
+                
+                    .dataframe tbody tr th {
+                        vertical-align: top;
+                    }
+                
+                    .dataframe thead th {
+                        text-align: right;
+                    }
+                </style>
+                <table border="1" class="dataframe">
+                  <thead>
+                    <tr style="text-align: right;">
+                      <th></th>
+                      <th>DAY</th>
+                      <th>DEATHS</th>
+                      <th>DEFORMEDNAME</th>
+                      <th>DR_DRINKNAME</th>
+                      <th>DR_ZIP</th>
+                      <th>GVWR_FROMNAME</th>
+                      <th>GVWR_TONAME</th>
+                      <th>HIT_RUNNAME</th>
+                      <th>HOUR</th>
+                      <th>LAST_YRNAME</th>
+                      <th>L_COMPL</th>
+                      <th>L_STATUSNAME</th>
+                      <th>MOD_YEAR</th>
+                      <th>NUMOCCS</th>
+                      <th>OWNER</th>
+                      <th>ROLINLOCNAME</th>
+                      <th>SPEEDRELNAME</th>
+                      <th>TOWEDNAME</th>
+                      <th>TRAV_SP</th>
+                      <th>VPICBODYCLASSNAME</th>
+                      <th>VPICMAKENAME</th>
+                      <th>VSPD_LIM</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>0</th>
+                      <td>12</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>0</td>
+                      <td>33060</td>
+                      <td>1.0</td>
+                      <td>1</td>
+                      <td>0</td>
+                      <td>22</td>
+                      <td>2020</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>2016</td>
+                      <td>2</td>
+                      <td>1</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>1</td>
+                      <td>85.0</td>
+                      <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
+                      <td>Jeep</td>
+                      <td>70</td>
+                    </tr>
+                    <tr>
+                      <th>1</th>
+                      <td>12</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>0</td>
+                      <td>30316</td>
+                      <td>1.0</td>
+                      <td>1</td>
+                      <td>0</td>
+                      <td>22</td>
+                      <td>No Record</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>2021</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>1</td>
+                      <td>70.0</td>
+                      <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
+                      <td>Volvo</td>
+                      <td>70</td>
+                    </tr>
+                    <tr>
+                      <th>2</th>
+                      <td>11</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>0</td>
+                      <td>36116</td>
+                      <td>1.0</td>
+                      <td>1</td>
+                      <td>0</td>
+                      <td>18</td>
+                      <td>2020</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>2004</td>
+                      <td>2</td>
+                      <td>1</td>
+                      <td>0</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>100.0</td>
+                      <td>Sedan/Saloon</td>
+                      <td>Lexus</td>
+                      <td>70</td>
+                    </tr>
+                    <tr>
+                      <th>3</th>
+                      <td>7</td>
+                      <td>0</td>
+                      <td>1</td>
+                      <td>0</td>
+                      <td>35405</td>
+                      <td>1.0</td>
+                      <td>1</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>2018</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>2009</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>70.0</td>
+                      <td>Sedan/Saloon</td>
+                      <td>Toyota</td>
+                      <td>70</td>
+                    </tr>
+                    <tr>
+                      <th>5</th>
+                      <td>30</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>1</td>
+                      <td>35180</td>
+                      <td>2.0</td>
+                      <td>2</td>
+                      <td>0</td>
+                      <td>22</td>
+                      <td>No Record</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>1998</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>100.0</td>
+                      <td>Pickup</td>
+                      <td>Dodge</td>
+                      <td>70</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+            <p>
+
             </p>
         </div>
     </body>

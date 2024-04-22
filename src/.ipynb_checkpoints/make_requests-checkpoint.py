@@ -27,6 +27,8 @@ class Requester:
         df = pd.DataFrame({k: [d[k] for d in data] for k in keys})
         df.to_csv(f"../data/data-raw/fars_data_{extensionNumber:02d}.csv")
 
+        
+    
     
 if __name__ == "__main__":
     dataRequester = Requester()

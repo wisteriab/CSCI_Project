@@ -716,6 +716,7 @@
               </table>
               </div>
           <h2>Model Implementation</h2>
+          <h3>Support Vector Classification and Linear Support Vector Classification</h3>
             <p>
             Our first models implemented compared sklearn's support vector classification's SVC and linear SVC models to classify the body type of vehicles involved in fatal accidents.
             In order to use these two model types <i>and normalize the data</i> only quantifiable features were allowed to be passed. 
@@ -1124,37 +1125,44 @@
                   <tr>
                     <td>SVC</td>
                     <td>2533.0</td>
+                    <td>0.558209</td>
                     <td>0.579501</td>
-                    <td>0.579501</td>
-                    <td>0.579501</td>
+                    <td>0.538466</td>
                   </tr>
                   <tr>
                     <td>Linear SVC</td>
                     <td>2538.0</td>
+                    <td>0.569897</td>
                     <td>0.580645</td>
-                    <td>0.580645</td>
-                    <td>0.580645</td>
+                    <td>0.536464</td>
                   </tr>
                   <tr>
                     <td>Reduced SVC</td>
                     <td>1541.0</td>
+                    <td>0.230243</td>
                     <td>0.352551</td>
-                    <td>0.352551</td>
-                    <td>0.352551</td>
+                    <td>0.247562</td>
                   </tr>
                   <tr>
                     <td>Reduced Linear SVC</td>
                     <td>1578.0</td>
+                    <td>0.321388</td>
                     <td>0.361016</td>
-                    <td>0.361016</td>
-                    <td>0.361016</td>
+                    <td>0.290559</td>
                   </tr>
                 </tbody>
               </table>
               </div>
             <p>
+              It is additionally important to note that when calculating these scores, the weighted average of the scores were included such that the support of classes were taken into account.
+              This came as a necessity as the goal of this model was a multiclass prediction. As such the weighted, micro or macro scores were necessary.
+              The weighted score was chosen over the other two due to the difference in volumes of each target class present.
+              In both sets of comparisons in classification, the linear SVC models outperformed the plain SVC model ever so slightly.
+              Surprisingly too, the reduced model faired substantially poorer than the non-reduced model scoreing nearly half of the full model.
 
             </p>
+          
         </div>
+
     </body>
 </html>

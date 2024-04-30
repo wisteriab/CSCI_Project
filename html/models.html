@@ -1157,12 +1157,320 @@
               It is additionally important to note that when calculating these scores, the weighted average of the scores were included such that the support of classes were taken into account.
               This came as a necessity as the goal of this model was a multiclass prediction. As such the weighted, micro or macro scores were necessary.
               The weighted score was chosen over the other two due to the difference in volumes of each target class present.
-              In both sets of comparisons in classification, the linear SVC models outperformed the plain SVC model ever so slightly.
+              Looking to the accuracy scores of these 4 models, accuracy, recall, f1 and precision, we can see the highest performer, the linear SVC model of the full dataset, was able to answer the question of whether these features could predict what body class was present in a fatal accident with shy of 60% accuracy.
+              While this result is not the greatest at perfect prediction, the results of each of the scores provide insight into the data itself.
+              We see that there is a greater difference between the linear and svc models in the reduced dataset than the full dataset.
+              In both sets of comparisons in classification, the linear SVC models outperformed the plain SVC model ever so slightly ultimately suggesting its superiority in this situation.
               Surprisingly too, the reduced model faired substantially poorer than the non-reduced model scoreing nearly half of the full model.
-
+              Ultimately this suggests that the make of the car is a highly important feature when attempting to classify what class of vehicle was present in a fatal accident.
+              
             </p>
-          
+          <h3>Random Forest Classification</h3>
+            <p>
+              In addition to the Support vector classification and the linear support vector classification, there are other modalities to test the data.
+              With this in mind, the master dataset above was modified for another question of interest: can the data in the dataset be used to predict whether a fatality occured in a given accident.
+              In order to do this, the dataset was again modified with a boolean value to represent whether a death had occurred or not. 
+              The dataset looks as follows and is used in the following 3 models:
+            </p>
+            <div>
+              <style scoped>
+                  .dataframe tbody tr th:only-of-type {
+                      vertical-align: middle;
+                  }
+              
+                  .dataframe tbody tr th {
+                      vertical-align: top;
+                  }
+              
+                  .dataframe thead th {
+                      text-align: right;
+                  }
+              </style>
+              <table border="1" class="dataframe">
+                <thead>
+                  <tr style="text-align: right;">
+                    <th>DEATHS</th>
+                    <th>DR_DRINK</th>
+                    <th>DR_HGT</th>
+                    <th>DR_WGT</th>
+                    <th>HIT_RUNNAME</th>
+                    <th>TRAV_SP</th>
+                    <th>HOUR</th>
+                    <th>MOD_YEAR</th>
+                    <th>MODELNAME</th>
+                    <th>VSPD_LIM</th>
+                    <th>VPICBODYCLASSNAME</th>
+                    <th>NUMOCCS</th>
+                    <th>MAKENAME</th>
+                    <th>MINUTE</th>
+                    <th>TIME</th>
+                    <th>APRX_WGT</th>
+                    <th>MOD_YEAR_5YR_CHUNK</th>
+                    <th>RELATIVE_SPEED</th>
+                    <th>BMI</th>
+                    <th>DEATHOCCURRED</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>67</td>
+                    <td>145</td>
+                    <td>0</td>
+                    <td>80</td>
+                    <td>2</td>
+                    <td>1997</td>
+                    <td>ES-250/300/300h/330/ 350</td>
+                    <td>45</td>
+                    <td>Sedan/Saloon</td>
+                    <td>4</td>
+                    <td>Lexus</td>
+                    <td>58</td>
+                    <td>2.966667</td>
+                    <td>3282.602226</td>
+                    <td>1995</td>
+                    <td>35</td>
+                    <td>22.707730</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>67</td>
+                    <td>215</td>
+                    <td>0</td>
+                    <td>70</td>
+                    <td>14</td>
+                    <td>1995</td>
+                    <td>Camry</td>
+                    <td>65</td>
+                    <td>Sedan/Saloon</td>
+                    <td>1</td>
+                    <td>Toyota</td>
+                    <td>55</td>
+                    <td>14.916667</td>
+                    <td>3491.123366</td>
+                    <td>1995</td>
+                    <td>5</td>
+                    <td>33.670082</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>68</td>
+                    <td>228</td>
+                    <td>0</td>
+                    <td>10</td>
+                    <td>14</td>
+                    <td>2016</td>
+                    <td>Medium/Heavy - CBE</td>
+                    <td>55</td>
+                    <td>Truck-Tractor</td>
+                    <td>1</td>
+                    <td>Peterbilt</td>
+                    <td>55</td>
+                    <td>14.916667</td>
+                    <td>20496.736917</td>
+                    <td>2015</td>
+                    <td>-45</td>
+                    <td>34.663495</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>73</td>
+                    <td>133</td>
+                    <td>0</td>
+                    <td>80</td>
+                    <td>15</td>
+                    <td>2007</td>
+                    <td>Azera  (For 2018 on, code as vehicle model 398)</td>
+                    <td>35</td>
+                    <td>Sedan/Saloon</td>
+                    <td>5</td>
+                    <td>Hyundai</td>
+                    <td>20</td>
+                    <td>15.333333</td>
+                    <td>2755.457278</td>
+                    <td>2005</td>
+                    <td>45</td>
+                    <td>17.545318</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>64</td>
+                    <td>115</td>
+                    <td>0</td>
+                    <td>70</td>
+                    <td>0</td>
+                    <td>2013</td>
+                    <td>Suburban/Yukon XL (2004 on; see 431 for 1950- ...</td>
+                    <td>45</td>
+                    <td>Sport Utility Vehicle (SUV)/Multi-Purpose Vehi...</td>
+                    <td>1</td>
+                    <td>GMC</td>
+                    <td>45</td>
+                    <td>0.750000</td>
+                    <td>4115.627711</td>
+                    <td>2015</td>
+                    <td>25</td>
+                    <td>19.737549</td>
+                    <td>1</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+            <p>
+              This data was then applied to a random forest classifier in an attempt to optimize prediction to the previous question.
+              Random forest classification in general averages multiple decision trees such that overfitting is more corrected for, and provide insight into the importance of features in the data.
+              Following implementation of the model on the above dataset, the random forest classifier was able to answer that yes, we can predict whether a death occurred in a given vehicle with an accuracy of roughly 75% as seen in the table below:
+            </p>
+              <div>
+                <style scoped>
+                    .dataframe tbody tr th:only-of-type {
+                        vertical-align: middle;
+                    }
+                
+                    .dataframe tbody tr th {
+                        vertical-align: top;
+                    }
+                
+                    .dataframe thead th {
+                        text-align: right;
+                    }
+                </style>
+                <table border="1" class="dataframe">
+                  <thead>
+                    <tr style="text-align: right;">
+                      <th>Accuracy</th>
+                      <th>Precision</th>
+                      <th>Recall</th>
+                      <th>F1 Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>0.748418</td>
+                      <td>0.76768</td>
+                      <td>0.71223</td>
+                      <td>0.738916</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+            <p>
+              It is also worth noting that when the data was again refined to include only those points where the driver was intoxicated, the score of the model increased with accuracy, recall, f1 and precision scores of 0.814, 0.984, 0.894, and 0.819 respectively.
+              The random forest classifier additionally ranked the features in the dataset from most to least important:
+              <ol>
+                <li>Approximate weight</li>
+                <li>Relative speed</li>
+                <li>Model year</li>
+                <li>Time</li>
+                <li>Travel speed</li>
+                <li>BMI</li>
+                <li>Minute</li>
+                <li>Driver weight</li>
+                <li>Driver intoxication</li>
+                <li>Driver height</li>
+                <li>Hour</li>
+                <li>Speed limit</li>
+                <li>Number of vehicle occupants</li>
+                <li>Whether the accident was a hit and run or not</li>
+              </ol>
+              Using this information provides some insight into whether each of these features is necessary and how much value it has to the model. 
+              In order to reduce these features optimally, we can either use backwards selection, or implement another model to optimize the features present.
+              Said model is Principal Component Analysis and follows in the next section.
+            </p>
+          <h3>Principal Component Analysis</h3>
+            <p>
+              Looking to the random forest classifier, it is evident that the data is highly dimensional. 
+              While backwards selection is an option, we can optimize dimension reduction through Principal Component Analysis as previously mentioned.
+              PCA will also help to answer whether it is even possible or wise to reduce the dimensionality of the dataset. 
+              After implementation of PCA, results demonstrated that it is possible to reduce the dimensions of the dataset, although successive reduction in data did not wholely reduce noise all that dramatically.
+              As seen in the below graph, successful clustering of the data into vehicles with a death present and those without demonstrates that there are evident groups among the data.
+              The locii of each of the two groups is distinct from one another.
+              However, as seen by the combination of the two groups in the middle, there is substanital muddling and a lack of a clear hyperplane that could seaprate and cluster the two groups nicely.
+            </p>
+              <figure>
+                <img src = "../plots/PCA.png"  style = "float:center"> 
+              </figure>    
+          <h3>K Means Clustering</h3>
+            <p>
+              Following moderate success in testing whether dimensionality could occur, further models can be implemented to see if clustering is an effective way to predict whether a death occurred or not.
+              Looking to the Principal Component Analysis and the output it provided, K means clustering with a k value of 2 is likely to be a successful choice as evidenced by the 2 distinct locii as seen above.
+              In general K means clustering aims to group all points within a dataset into k groups. 
+              The rules used to cluster each observation are then applied to the test set to validate teh models efficacy.
+              Implementation of K means clustering yielded a grouping of points as seen in the image below.
+              Ultimately, this grouping is more decisive than the PCA grouping although there is still muddled overlap present in the data.
+            </p>
+              <figure>
+                <img src = "../plots/KMeans.png" style = "float:center">
+              </figure>
+            <p>
+              Furthermore, the accuracy scores of the clustering model were as follows:
+            </p>
+            <div>
+              <style scoped>
+                  .dataframe tbody tr th:only-of-type {
+                      vertical-align: middle;
+                  }
+              
+                  .dataframe tbody tr th {
+                      vertical-align: top;
+                  }
+              
+                  .dataframe thead th {
+                      text-align: right;
+                  }
+              </style>
+              <table border="1" class="dataframe">
+                <thead>
+                  <tr style="text-align: right;">
+                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1 Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0.664797</td>
+                    <td>0.663359</td>
+                    <td>0.661458</td>
+                    <td>0.662407</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+            <p>
+              These scores indicate that this model of clustering was susbstantially better than any of the 4 SVC models highlighting the efficacy of the PCA model implemented above.
+              However, a score averaging 66% still isn't ideal ultimately suggesting that a more dynamic model like the random forest classifier may be best for a highly dimensional, noisy dataset as this one.
+            </p>
+          <h3>Drawbacks in Model Development</h3>
+          <p>
+            While working through this dataset and implementing each of our models, many setbacks impacted successful model development.
+            The most immediate issue arose during the second round of data cleaning.
+            Much of the data collected by the National Highway Traffic Administration is categorical or ordinal. 
+            The categorical data had to be remapped in some cases to ordinal data to represent certain categories. 
+            This ultimately has drawbacks in that it may favor certain categories or groups based on the value it is assigned.
+            In the case where such data was one hot encoded, it made the data set highly dimensional which likely reduced the suceess of the model as seen by the low scores of each of the SVC models.
+            While translating categorical and remapping some of the ordinal data, attempts were made to fairly distribute values to certain categories, although it is likely that due to the nature of how models are trained and developed, some bias will exist.
+            This brings about a further issue seen in the data: the lack of normality in some of the features.
+            The lack of normality amongst the terms impacted the importance of some features and presented another avenue for bias.
+            This was minimized weherever possible by standardizing and scaling variables and eliminating outliers when possible.
+          </p>
+          <p>
+            Additionally, the data was highly dimensional.
+            As seen by many of the datasets used, many of the datasets used had a noticeable amount of features. 
+            This was a substantial reduction in features from the original dataset, however, such high dimensionality has the potential to lead to issues with multicollinearity adn overexplanation by the models.
+            Attempts were made to reduce the impact of such features by preemptively reducing the amount of features present logically.
+            However, as with the ordinal data, there is potential for some bias to exist in the same manner as bias seen in the newly created and mapped ordinal features.
+          </p>
         </div>
-
     </body>
 </html>

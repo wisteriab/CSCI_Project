@@ -1451,6 +1451,16 @@
               These scores indicate that this model of clustering was susbstantially better than any of the 4 SVC models highlighting the efficacy of the PCA model implemented above.
               However, a score averaging 66% still isn't ideal ultimately suggesting that a more dynamic model like the random forest classifier may be best for a highly dimensional, noisy dataset as this one.
             </p>
+          <h3> SVM: Support Vector Machine </h3>
+            <p>
+              Considering the clustering from above, another support vector machine was implemented such that not only could the best model be found, but comparisons could be made in between each cluster analysis.
+              The support vector machine, in general, acts to cluster points in a dataset based on its features to predict whether certain inputs yield a desired output. 
+              In this case, SVM was used categorize the datapoints and features within the dataset to predict whether or not a death occurred. 
+              Different smoothing values were tested to optimize the accuracy of the model as demonstrated in the image below.
+              Looking at the accuracy scores of each model, it appears as though the optimized value of slack hyperparameter within the kernel was 0.025 while the worst was 0.035 with accuracy scores of roughly 0.7 and 0.66 respectively. 
+              Using these values provides a accuracy score that is relatively high and performs slighltly better than the K-Means cluster, although in for the sake of this question, it is evident that the random forest model still performs the best in predicting whether a death will occur or not.
+            </p>
+            <img src = "../plots/slack_param_analysis.png">
           <h3>Drawbacks in Model Development</h3>
           <p>
             While working through this dataset and implementing each of our models, many setbacks impacted successful model development.
